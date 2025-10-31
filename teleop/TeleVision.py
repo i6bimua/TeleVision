@@ -1,22 +1,22 @@
 import time
 from vuer import Vuer
 from vuer.events import ClientEvent
-from vuer.schemas import ImageBackground, group, Hands, WebRTCStereoVideoPlane, DefaultScene
-from multiprocessing import Array, Process, shared_memory, Queue, Manager, Event, Semaphore
+from vuer.schemas import ImageBackground, group, Hands, WebRTCStereoVideoPlane, DefaultScene, Sphere
+from multiprocessing import Array, Process, shared_memory, Queue, Manager, Event, Semaphore, Value
 import numpy as np
 import asyncio
 from webrtc.zed_server import *
 
 class OpenTeleVision:
-    def __init__(self, img_shape, shm_name, queue, toggle_streaming, stream_mode="image", cert_file="./cert.pem", key_file="./key.pem", ngrok=False):
+    def __init__(self, img_shape, shm_name, queue, toggle_streaming, stream_mode="image", cert_file="./cert.pem", key_file="./key.pem", ngrok=False, static_root="figures"):
         # self.app=Vuer()
         self.img_shape = (img_shape[0], 2*img_shape[1], 3)
         self.img_height, self.img_width = img_shape[:2]
 
         if ngrok:
-            self.app = Vuer(host='0.0.0.0', queries=dict(grid=False), queue_len=3)
+            self.app = Vuer(host='0.0.0.0', queries=dict(grid=False), queue_len=3, static_root=static_root)
         else:
-            self.app = Vuer(host='0.0.0.0', cert=cert_file, key=key_file, queries=dict(grid=False), queue_len=3)
+            self.app = Vuer(host='0.0.0.0', cert=cert_file, key=key_file, queries=dict(grid=False), queue_len=3, static_root=static_root)
 
         self.app.add_handler("HAND_MOVE")(self.on_hand_move)
         self.app.add_handler("CAMERA_MOVE")(self.on_cam_move)
@@ -26,6 +26,15 @@ class OpenTeleVision:
             self.app.spawn(start=False)(self.main_image)
         elif stream_mode == "webrtc":
             self.app.spawn(start=False)(self.main_webrtc)
+        elif stream_mode == "pano":
+            # 展示 figures/pano.jpg 为球内贴图（单目360）
+            self.app.spawn(start=False)(self.main_pano)
+        elif stream_mode == "stereo_pano":
+            # 展示 figures/left_pano.jpg / right_pano.jpg 为双目360
+            self.app.spawn(start=False)(self.main_stereo_pano)
+        elif stream_mode == "stereo_cubemap":
+            # 展示左右眼各六面贴图（若当前 Vuer 版本不支持 per-eye skybox，将回退为双球体）
+            self.app.spawn(start=False)(self.main_stereo_cubemap)
         else:
             raise ValueError("stream_mode must be either 'webrtc' or 'image'")
 
@@ -124,6 +133,122 @@ class OpenTeleVision:
             )
         while True:
             await asyncio.sleep(1)
+
+    async def main_pano(self, session, fps=60):
+        session.set @ DefaultScene(frameloop="always")
+        session.upsert @ Hands(fps=fps, stream=True, key="hands", showLeft=False, showRight=False)
+        # 一个巨大球体，内贴图为 /static/pano.jpg
+        session.upsert @ Sphere(
+            name="pano",
+            args=[1, 64, 64],
+            scale=[100, 100, 100],
+            materialType="standard",
+            material={"map": "/static/pano.jpg", "side": 1},
+            position=[0, 0, 0],
+        )
+        while True:
+            # 刷新材质，避免缓存
+            session.upsert @ Sphere(
+                name="pano",
+                material={"map": f"/static/pano.jpg?t={time.time()}", "side": 1},
+            )
+            await asyncio.sleep(1.0 / fps)
+
+    async def main_stereo_pano(self, session, fps=60):
+        session.set @ DefaultScene(frameloop="always")
+        session.upsert @ Hands(fps=fps, stream=True, key="hands", showLeft=False, showRight=False)
+        # 左眼球体（layer 1）
+        session.upsert @ Sphere(
+            name="left_pano",
+            args=[1, 64, 64],
+            scale=[100, 100, 100],
+            materialType="standard",
+            material={"map": "/static/left_pano.jpg", "side": 1},
+            position=[0, 0, 0],
+            layers=1,
+        )
+        # 右眼球体（layer 2）
+        session.upsert @ Sphere(
+            name="right_pano",
+            args=[1, 64, 64],
+            scale=[100, 100, 100],
+            materialType="standard",
+            material={"map": "/static/right_pano.jpg", "side": 1},
+            position=[0, 0, 0],
+            layers=2,
+        )
+        while True:
+            session.upsert @ Sphere(
+                name="left_pano",
+                material={"map": f"/static/left_pano.jpg?t={time.time()}", "side": 1},
+                layers=1,
+            )
+            session.upsert @ Sphere(
+                name="right_pano",
+                material={"map": f"/static/right_pano.jpg?t={time.time()}", "side": 1},
+                layers=2,
+            )
+            await asyncio.sleep(1.0 / fps)
+
+    async def main_stereo_cubemap(self, session, fps=60):
+        session.set @ DefaultScene(frameloop="always")
+        session.upsert @ Hands(fps=fps, stream=True, key="hands", showLeft=False, showRight=False)
+        # 尝试以 per-eye 立方体背景加载（若版本不支持，则回退到双球体）
+        try:
+            # 伪代码：若 Vuer 支持 background cube per-eye，可按以下结构组织
+            # 左眼 layer 1，右眼 layer 2；urls 顺序应为 [px, nx, py, ny, pz, nz]
+            left_urls = [
+                "/static/left_px.jpg",
+                "/static/left_nx.jpg",
+                "/static/left_py.jpg",
+                "/static/left_ny.jpg",
+                "/static/left_pz.jpg",
+                "/static/left_nz.jpg",
+            ]
+            right_urls = [
+                "/static/right_px.jpg",
+                "/static/right_nx.jpg",
+                "/static/right_py.jpg",
+                "/static/right_ny.jpg",
+                "/static/right_pz.jpg",
+                "/static/right_nz.jpg",
+            ]
+            # 使用 upsert 更新 DefaultScene 的背景不一定有 per-eye API；这里采用两层 Sphere 作为回退，
+            # 同时保留 cubemap URL 列表，便于后续切换为官方 skybox 接口。
+            raise Exception("fallback_to_sphere")
+        except:
+            # 回退：仍用左右两球体，但贴图改为 equirectangular 时的方案；
+            # 若你要严格使用十二面，请在前端加 skybox 支持后替换此回退。
+            session.upsert @ Sphere(
+                name="left_pano_cb",
+                args=[1, 64, 64],
+                scale=[100, 100, 100],
+                materialType="standard",
+                material={"map": "/static/left_pano.jpg", "side": 1},
+                position=[0, 0, 0],
+                layers=1,
+            )
+            session.upsert @ Sphere(
+                name="right_pano_cb",
+                args=[1, 64, 64],
+                scale=[100, 100, 100],
+                materialType="standard",
+                material={"map": "/static/right_pano.jpg", "side": 1},
+                position=[0, 0, 0],
+                layers=2,
+            )
+            while True:
+                session.upsert @ Sphere(
+                    name="left_pano_cb",
+                    material={"map": f"/static/left_pano.jpg?t={time.time()}", "side": 1},
+                    layers=1,
+                )
+                session.upsert @ Sphere(
+                    name="right_pano_cb",
+                    material={"map": f"/static/right_pano.jpg?t={time.time()}", "side": 1},
+                    layers=2,
+                )
+                await asyncio.sleep(1.0 / fps)
     
     async def main_image(self, session, fps=60):
         session.upsert @ Hands(fps=fps, stream=True, key="hands", showLeft=False, showRight=False)

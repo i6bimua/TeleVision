@@ -23,5 +23,6 @@ setuptools==69.5.1
 torch==2.3.0
 torchvision==0.18.0
 tqdm==4.66.4
-vuer==0.0.32rc7
+vuer[all]==0.0.67
 wandb==0.17.3
+imageio==2.34.0
