@@ -123,80 +123,42 @@ class OpenTeleVision:
             await asyncio.sleep(1)
     
     async def main_panorama(self, session, fps=60):
-        """
-        使用SkyBall显示全景图 - 严格按照官方示例
-        """
-        from vuer.schemas import Sphere, DefaultScene
-        from asyncio import sleep
-        
-        # 读取第一帧图像并创建Sphere
-        display_image = self.img_array.copy()
-        
-        # 将numpy数组转换为JPEG格式的base64字符串
-        pil_img = Image.fromarray(display_image, 'RGB')
-        
-        # 使用内存缓冲区
-        buffer = io.BytesIO()
-        pil_img.save(buffer, format='JPEG', quality=85)
-        img_bytes = buffer.getvalue()
-        img_base64 = base64.b64encode(img_bytes).decode('utf-8')
-        
-        # 创建data URL
-        img_data_url = f"data:image/jpeg;base64,{img_base64}"
-        
-        # 创建Sphere - 应用坐标系转换旋转矩阵
-        # 从Z-UP到Y-UP的转换：基于grd_yup2grd_zup的逆矩阵
-        # 绕Y轴旋转+90°（XYZ顺序内旋）进行坐标系转换
-        sphere = Sphere(
+        """使用SkyBall显示全景图"""
+        # 初始化场景和手部追踪
+        session.set @ DefaultScene(Sphere(
             args=[1, 32, 32],
             materialType="standard",
-            material={"map": img_data_url, "side": 1},
+            material={"map": "", "side": 1},
             position=[0, 0, 0],
-            rotation=[0, 0.5 * np.pi, 0],  # [0°, 90°, 0°] = 绕Y轴旋转90度
-        )
-        
-        # 使用官方示例的方式设置DefaultScene（Y-UP，不设置Z-up）
-        session.set @ DefaultScene(sphere)
-        
+            rotation=[0, 0.5 * np.pi, 0],  # 绕Y轴旋转90度进行坐标系转换
+        ))
         session.upsert @ Hands(fps=fps, stream=True, key="hands", showLeft=False, showRight=False)
         
-        # 恢复更新功能 - 严格按照官方示例的配置
-        end_time = time.time()
         frame_count = 0
-        
         while True:
             start = time.time()
             display_image = self.img_array.copy()
             
             # 将numpy数组转换为JPEG格式的base64字符串
             pil_img = Image.fromarray(display_image, 'RGB')
-            
-            # 使用内存缓冲区
             buffer = io.BytesIO()
             pil_img.save(buffer, format='JPEG', quality=85)
-            img_bytes = buffer.getvalue()
-            img_base64 = base64.b64encode(img_bytes).decode('utf-8')
-            
-            # 创建data URL
+            img_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
             img_data_url = f"data:image/jpeg;base64,{img_base64}"
             
-            # 更新Sphere - 严格按照官方示例的配置，确保rotation等参数完全一致
+            # 更新Sphere材质
             session.upsert @ Sphere(
                 args=[1, 32, 32],
                 materialType="standard",
                 material={"map": img_data_url, "side": 1},
                 position=[0, 0, 0],
-                rotation=[0, 0.5 * np.pi, 0],  # 与初始化时完全一致：[0°, 90°, 0°]
+                rotation=[0, 0.5 * np.pi, 0],
                 key="skyball"
             )
             
-            # 不在循环中更新DefaultScene，避免覆盖up参数
-            
-            end_time = time.time()
             frame_count += 1
-            
             if self.print_freq and frame_count % 60 == 0:
-                print(f'Panorama FPS: {60 / (end_time - start) if frame_count > 0 else 0:.2f}')
+                print(f'Panorama FPS: {60 / (time.time() - start):.2f}')
             
             await asyncio.sleep(0.016)  # ~60fps
     
