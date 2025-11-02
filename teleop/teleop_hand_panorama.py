@@ -63,18 +63,43 @@ class VuerTeleop:
         self.right_retargeting = right_retargeting_config.build()
 
     def step(self):
+        # 从预处理器获取处理后的姿态数据
+        # head_mat: (4, 4) - 头部齐次变换矩阵
+        # left_wrist_mat: (4, 4) - 左手腕齐次变换矩阵（已转换为Z-UP坐标系，相对头部）
+        # right_wrist_mat: (4, 4) - 右手腕齐次变换矩阵（已转换为Z-UP坐标系，相对头部）
+        # left_hand_mat: (25, 3) - 左手25个关键点的3D坐标（已转换为相对手腕的Inspire Hand坐标系）
+        # right_hand_mat: (25, 3) - 右手25个关键点的3D坐标（已转换为相对手腕的Inspire Hand坐标系）
         head_mat, left_wrist_mat, right_wrist_mat, left_hand_mat, right_hand_mat = self.processor.process(self.tv)
 
-        head_rmat = head_mat[:3, :3]
+        # 提取头部旋转矩阵（3×3）
+        head_rmat = head_mat[:3, :3]  # shape: (3, 3)
 
-        left_pose = np.concatenate([left_wrist_mat[:3, 3] + np.array([-0.6, 0, 1.6]),
-                                    rotations.quaternion_from_matrix(left_wrist_mat[:3, :3])[[1, 2, 3, 0]]])
-        right_pose = np.concatenate([right_wrist_mat[:3, 3] + np.array([-0.6, 0, 1.6]),
-                                     rotations.quaternion_from_matrix(right_wrist_mat[:3, :3])[[1, 2, 3, 0]]])
-        left_qpos = self.left_retargeting.retarget(left_hand_mat[tip_indices])[[4, 5, 6, 7, 10, 11, 8, 9, 0, 1, 2, 3]]
-        right_qpos = self.right_retargeting.retarget(right_hand_mat[tip_indices])[[4, 5, 6, 7, 10, 11, 8, 9, 0, 1, 2, 3]]
+        # 构建左手姿态: [x, y, z, qx, qy, qz, qw]
+        # left_wrist_mat[:3, 3]: (3,) - 位置向量，加上固定偏移 [-0.6, 0, 1.6]
+        # rotations.quaternion_from_matrix(): 返回 [w, x, y, z]，重排为 [x, y, z, w]
+        left_pose = np.concatenate([left_wrist_mat[:3, 3] + np.array([-0.6, 0, 1.6]),  # (3,) 位置
+                                    rotations.quaternion_from_matrix(left_wrist_mat[:3, :3])[[1, 2, 3, 0]]])  # (4,) 四元数
+        # left_pose shape: (7,)
+
+        # 构建右手姿态: [x, y, z, qx, qy, qz, qw]
+        right_pose = np.concatenate([right_wrist_mat[:3, 3] + np.array([-0.6, 0, 1.6]),  # (3,) 位置
+                                     rotations.quaternion_from_matrix(right_wrist_mat[:3, :3])[[1, 2, 3, 0]]])  # (4,) 四元数
+        # right_pose shape: (7,)
+
+        # 手指重定向：从5个指尖位置推断12个关节角度
+        # left_hand_mat[tip_indices]: (5, 3) - 5个指尖位置（tip_indices = [4, 9, 14, 19, 24]）
+        # retarget() 返回: (12,) - 12个关节角度
+        # [[4, 5, 6, 7, 10, 11, 8, 9, 0, 1, 2, 3]]: 重排关节顺序以匹配URDF定义
+        left_qpos = self.left_retargeting.retarget(left_hand_mat[tip_indices])[[4, 5, 6, 7, 10, 11, 8, 9, 0, 1, 2, 3]]  # shape: (12,)
+        right_qpos = self.right_retargeting.retarget(right_hand_mat[tip_indices])[[4, 5, 6, 7, 10, 11, 8, 9, 0, 1, 2, 3]]  # shape: (12,)
 
         return head_rmat, left_pose, right_pose, left_qpos, right_qpos
+        # 返回:
+        #   head_rmat: (3, 3) - 头部旋转矩阵
+        #   left_pose: (7,) - 左手位置+姿态 [x, y, z, qx, qy, qz, qw]
+        #   right_pose: (7,) - 右手位置+姿态 [x, y, z, qx, qy, qz, qw]
+        #   left_qpos: (12,) - 左手12个关节角度
+        #   right_qpos: (12,) - 右手12个关节角度
 
 
 class Sim:
@@ -238,7 +263,7 @@ class Sim:
         
         # 定义六个面的lookat offset - 使用与OLD相同的结构
         self.cam_lookat_offset_F = np.array([1, 0, 0])   # Front: 看向+X
-        self.cam_lookat_offset_R = np.array([0, -1, 0])   # Right: 看向+Y (右侧)
+        self.cam_lookat_offset_R = np.array([0, -1, 0])   # Right: 看向-Y (右侧)
         self.cam_lookat_offset_B = np.array([-1, 0, 0])  # Back: 看向-X
         self.cam_lookat_offset_L = np.array([0, 1, 0])  # Left: 看向-Y (左侧)
         self.cam_lookat_offset_U = np.array([0.000001, 0, 1])   # Up: 看向+Z

@@ -2,6 +2,10 @@
 
 本文档详细说明了 `teleop_hand_panorama.py` 文件中从 VR 眼镜捕获手部姿态到 IsaacGym 模拟，再到全景图渲染返回的完整处理流程。
 
+![image-20251102110415207](image-20251102110415207.png)
+
+![65320E66-BCE5-43DC-9CBB-DC9E778208D6_1_201_a](65320E66-BCE5-43DC-9CBB-DC9E778208D6_1_201_a.jpeg)
+
 ## 目录
 
 1. [系统架构概述](#系统架构概述)
@@ -16,21 +20,35 @@
 
 该系统实现了一个完整的 VR 到 IsaacGym 的遥操作系统，包含以下主要组件：
 
+**进程架构**:
+- **主进程**: `teleop_hand_panorama.py` - 主循环，包含 Sim 和 VuerTeleop
+- **子进程**: `OpenTeleVision` - VR 通信进程，通过 `multiprocessing.Process` 启动
+
+**组件**:
 - **VuerTeleop**: 处理 VR 姿态数据，执行重定向
 - **Sim**: IsaacGym 模拟器，管理虚拟环境
-- **OpenTeleVision**: VR 通信模块，处理图像传输
+- **OpenTeleVision**: VR 通信模块，处理图像传输（独立进程）
 - **VuerPreprocessor**: 姿态数据预处理，坐标系转换
 
 ### 数据流方向
 
 ```
-VR眼镜 ←→ OpenTeleVision ←→ VuerPreprocessor ←→ VuerTeleop ←→ Sim (IsaacGym)
-                                                                    ↓
-                                                              全景图像生成
-                                                                    ↓
-                                                             共享内存传输
-                                                                    ↓
-                                                               VR眼镜显示
+                        [进程间边界]
+VR眼镜 (WebXR) ←→ [Vuer/WebSocket] ←→ OpenTeleVision (子进程) ←─ [共享内存] ─→ 主进程
+                                          ↓                             ↑
+                                    事件处理器                      VuerTeleop
+                                   (on_hand_move,                 + VuerPreprocessor
+                                    on_cam_move)                           ↑
+                                          ↓                            Sim
+                                  姿态数据写入共享内存                全景图像生成
+                                          ↓                             ↓
+                                  通过WebSocket发送              写入共享内存
+                                    VR姿态数据                          ↓
+                                                                  读取全景图
+                                                                       ↓
+                                                                  返回子进程
+                                                                  编码并通过
+                                                                  WebSocket发送
 ```
 
 ---
@@ -53,6 +71,7 @@ self.img_shape = (720, 1440, 3)      # 图像形状
 **处理说明**:
 - 设置全景图尺寸为 720×1440（2:1 宽高比）
 - 确保与后续相机系统输出匹配
+- **注意**: 这是在**主进程**中执行的
 
 #### 1.2 共享内存创建
 
@@ -69,9 +88,11 @@ self.img_array = np.ndarray(
 ```
 
 **处理说明**:
-- 创建共享内存缓冲区用于图像数据
+- 主进程创建共享内存缓冲区用于图像数据
 - 大小: `720 × 1440 × 3 × 1 byte = 3,110,400 bytes`
-- 允许多进程零拷贝访问
+- **多进程共享**: 主进程和子进程通过共享内存名访问同一块物理内存
+- **零拷贝**: 两个进程直接访问相同的内存页面，无需数据复制
+- **底层实现**: 使用操作系统的共享内存机制（POSIX shm_open/SHM）
 
 #### 1.3 OpenTeleVision 初始化
 
@@ -88,9 +109,10 @@ self.tv = OpenTeleVision(
 
 **处理说明**:
 - 启动 VR 连接服务器（使用 ngrok 或 SSL）
-- 创建 WebSocket 通信通道
-- 初始化共享内存读取器
-- 启动异步事件处理进程
+- 创建 WebSocket 通信通道（Vuer 框架）
+- **创建独立子进程**: `Process(target=self.run)` 运行 VR 通信服务
+- 在子进程中通过 `shared_memory.SharedMemory(name=shm_name)` 连接到同一共享内存
+- 启动异步事件处理（WebSocket 事件处理器）
 
 #### 1.4 重定向配置加载
 
@@ -219,9 +241,76 @@ def _setup_panorama_cameras(self):
 
 主循环在 `teleop_hand_panorama.py:424-436` 执行，每帧包含以下步骤：
 
+### 时序关系总览
+
+系统包含三个独立的时序子系统：
+
+| 子系统 | 更新频率 | 驱动方式 | 限制因素 |
+|--------|---------|---------|---------|
+| **VR姿态数据** | ~90-120Hz | WebXR 硬件刷新 | VR硬件刷新率 |
+| **主循环/IsaacGym** | 60Hz | `sync_frame_time()` | IsaacGym dt=1/60 |
+| **全景图传输** | 60Hz | `asyncio.sleep(0.016)` | 主循环输出 |
+
+**关键理解**:
+- VR 姿态更新：由 WebXR 硬件驱动，可能比 60Hz 更快
+- 主循环读取：在 60Hz 下读取最新共享内存
+- 全景图输出：固定在 60Hz，与主循环同步
+
+**循环频率**:
+- **IsaacGym**: 60Hz (`sim_params.dt = 1 / 60`)
+- **目标**: ~60fps 闭环
+- **关键函数**: `self.gym.sync_frame_time(self.sim)` (第339行) - **这是实际决定循环速度的函数**
+- **工作方式**: 
+  - 无限循环 `while True:` 会尽可能快地执行
+  - 但 `sync_frame_time()` 会让主线程**等待**，直到 IsaacGym 的内部时钟到达下一个物理步长时刻
+  - 因此虽然循环很忙，但实际帧率被限制到 60Hz
+- **如果没有 sync_frame_time**: 循环会以 CPU/GPU 能处理的最快速度运行（可能几百 fps），但 IsaacGym 物理会失同步
+
+**重要区别**:
+- **VR姿态更新**: 异步事件驱动，无固定帧率（受硬件限制，通常 90-120Hz）
+- **主循环/IsaacGym**: 固定在 60Hz（由 `sync_frame_time` 控制）
+- **全景图传输**: 固定在 60Hz（由主循环驱动）
+
 ### 步骤 1: 从 VR 眼镜捕获姿态数据
 
 **位置**: `TeleVision_panorama.py`
+
+#### 1.0 WebSocket 通信架构
+
+**Vuer 框架**:
+- `OpenTeleVision` 使用 **Vuer 框架** (`from vuer import Vuer`) 建立与 VR 客户端的 WebSocket 连接
+- Vuer 是一个基于 WebSocket 的 VR/WebXR 通信框架，支持双向数据传输
+- **端口**: 8012 (HTTPS/WSS)
+- **协议**: WebSocket (WSS) over HTTPS
+
+**初始化代码**:
+```python
+# TeleVision_panorama.py:28-31
+if ngrok:
+    self.app = Vuer(host='0.0.0.0', queries=dict(grid=False), queue_len=3)
+else:
+    self.app = Vuer(host='0.0.0.0', cert=cert_file, key=key_file, queries=dict(grid=False), queue_len=3)
+
+# 注册事件处理器
+self.app.add_handler("HAND_MOVE")(self.on_hand_move)
+self.app.add_handler("CAMERA_MOVE")(self.on_cam_move)
+```
+
+**工作原理**:
+1. VR 客户端通过 WebXR API 连接到服务器
+2. Vuer 自动处理 WebSocket 连接和事件分发
+3. 姿态数据通过预定义的事件类型 (`HAND_MOVE`, `CAMERA_MOVE`) 异步传输
+4. 服务器端事件处理器 (`on_hand_move`, `on_cam_move`) 接收数据并写入共享内存
+
+**更新时机**:
+- **事件驱动**: 当 VR 用户移动头部/手部时，WebXR 触发事件
+- **异步更新**: 事件处理器立即将数据写入共享内存（不受主循环限制）
+- **主循环轮询**: 主循环每次调用 `teleoperator.step()` 时读取最新数据
+
+**关键**: VR 姿态矩阵更新**没有固定帧率限制**！
+- 由用户的移动速度决定更新频率
+- 理论上可以在几毫秒内更新多次
+- 实际受限于 WebXR 硬件刷新率（通常 90Hz 或 120Hz）
 
 #### 1.1 头部姿态接收
 
@@ -274,8 +363,9 @@ self.vuer_left_wrist_mat = mat_update(self.vuer_left_wrist_mat, tv.left_hand.cop
 ```
 
 **处理说明**:
-- `mat_update()` 执行平滑滤波，减少噪声和抖动
-- 使用前一帧状态作为先验
+- `mat_update()` 实际只是**无效矩阵检查**，检测到奇异矩阵时使用前一帧
+- 非平滑；直接采用最新 WebSocket 数据
+- `mat_update` 实现：`if det(mat) == 0: return prev_mat else: return mat`
 
 #### 2.2 坐标系转换 (Y-UP → Z-UP)
 
@@ -465,6 +555,20 @@ self.gym.refresh_actor_root_state_tensor(self.sim)  # 刷新状态张量
 - `step_graphics()`: 更新可视化状态
 - `render_all_camera_sensors()`: 渲染所有相机图像到纹理
 
+#### 4.4 帧同步（关键！）
+
+**位置**: `teleop_hand_panorama.py:338-339`
+
+```python
+self.gym.draw_viewer(self.viewer, self.sim, True)
+self.gym.sync_frame_time(self.sim)  # ← 这就是决定循环速度的关键！
+```
+
+**重要**: `sync_frame_time()` **实际控制循环频率**
+- 让主线程等待，直到 IsaacGym 内部时钟到达下一个 `dt` 时刻
+- 确保循环按 `sim_params.dt = 1/60` 运行（60Hz）
+- 无此调用时，循环会尽可能快地运行，导致物理失同步
+
 ---
 
 ### 步骤 5: 捕获和转换全景图像
@@ -568,33 +672,37 @@ np.copyto(teleoperator.img_array, panorama_img)
 
 **处理说明**:
 - `np.copyto()` 将全景图复制到共享内存缓冲区
-- VR 进程可以立即读取（无锁，原子操作）
+- 用于主进程和 VR 进程间的零拷贝数据传输
 
-#### 6.2 VR 端读取和编码
+#### 6.2 VR 进程读取和编码
 
 ```python
 # TeleVision_panorama.py:main_panorama()
-display_image = self.img_array.copy()  # 从共享内存读取
-
-# 转换为PIL图像
-pil_img = Image.fromarray(display_image, 'RGB')
-
-# JPEG编码
-buffer = io.BytesIO()
-pil_img.save(buffer, format='JPEG', quality=85)
-img_bytes = buffer.getvalue()
-
-# Base64编码
-img_base64 = base64.b64encode(img_bytes).decode('utf-8')
-img_data_url = f"data:image/jpeg;base64,{img_base64}"
+while True:
+    display_image = self.img_array.copy()  # 从共享内存读取
+    
+    # 转换为PIL图像
+    pil_img = Image.fromarray(display_image, 'RGB')
+    
+    # JPEG编码
+    buffer = io.BytesIO()
+    pil_img.save(buffer, format='JPEG', quality=85)
+    img_bytes = buffer.getvalue()
+    
+    # Base64编码
+    img_base64 = base64.b64encode(img_bytes).decode('utf-8')
+    img_data_url = f"data:image/jpeg;base64,{img_base64}"
+    
+    await asyncio.sleep(0.016)  # ~60fps
 ```
 
 **处理说明**:
 - JPEG 质量 85: 平衡质量和传输速度
 - Base64 编码: 便于在 WebSocket 中传输
 - Data URL 格式: `data:image/jpeg;base64,{...}`
+- **帧率控制**: `await asyncio.sleep(0.016)` 确保 60Hz 图像更新
 
-#### 6.3 更新 Sphere 材质
+#### 6.3 通过 WebSocket 发送到 VR 客户端
 
 ```python
 session.upsert @ Sphere(
@@ -608,6 +716,7 @@ session.upsert @ Sphere(
 ```
 
 **处理说明**:
+- `session.upsert @ Sphere()` 通过 Vuer WebSocket 连接将更新发送到 VR 客户端
 - `Sphere` 作为天空球 (Skybox) 显示全景图
 - 用户位于球心，看到内侧纹理
 - 旋转 90° 用于坐标系对齐 (Z-UP → Y-UP)
@@ -621,7 +730,7 @@ await asyncio.sleep(0.016)  # ~60fps
 
 **处理说明**:
 - 目标 60fps，每帧 16.67ms
-- 包括图像读取、编码、传输的总时间
+- 包括图像读取、编码、WebSocket 传输的总时间
 
 ---
 
@@ -764,7 +873,7 @@ await asyncio.sleep(0.016)  # ~60fps
                      │
                      ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                     共享内存传输                                 │
+│           主进程 → VR进程: 共享内存                              │
 │                                                                 │
 │  [19] np.copyto(teleoperator.img_array, panorama_img)          │
 │       └─> 写入共享内存 (3,110,400 bytes)                       │
@@ -788,8 +897,8 @@ await asyncio.sleep(0.016)  # ~60fps
 │  [23] 更新Sphere                                                │
 │       └─> session.upsert @ Sphere(material=img_data_url)       │
 │                                                                 │
-│  [24] WebSocket传输                                             │
-│       └─> 发送到VR客户端                                        │
+│  [24] Vuer WebSocket传输                                        │
+│       └─> 通过session.upsert发送到VR客户端                      │
 └────────────────────┬────────────────────────────────────────────┘
                      │
                      ▼
@@ -817,14 +926,42 @@ await asyncio.sleep(0.016)  # ~60fps
 
 ## 关键技术点
 
-### 1. 共享内存通信
+### 1. 双通道通信架构
+
+系统使用两种通信机制协同工作：
+
+#### 1.1 WebSocket (Vuer) - 跨网络通信
+
+**VR ↔ 服务器**: 通过 Vuer 框架的 WebSocket 连接
+- **VR → 服务器**: 姿态数据 (`HAND_MOVE`, `CAMERA_MOVE` 事件)
+- **服务器 → VR**: 全景图数据 (`session.upsert @ Sphere`)
+- **协议**: WSS over HTTPS (端口 8012)
+- **优点**: 实时双向通信，跨网络支持
+
+#### 1.2 共享内存 - 进程间通信 (IPC)
 
 **实现**: `multiprocessing.shared_memory.SharedMemory`
 
+**关键区别**: 共享内存**不是**基于 WebSocket
+- WebSocket: 用于 **跨网络** 通信（VR 客户端 ↔ 服务器）
+- 共享内存: 用于 **本地进程间** 通信（主进程 ↔ 子进程）
+
+**工作流程**:
+1. **主进程**: 创建共享内存 `SharedMemory(create=True)`，获得唯一名称
+2. **子进程**: 通过名称连接 `SharedMemory(name=shm_name)` 到同一块物理内存
+3. **数据传递**: 
+   - 主进程写入: `np.copyto(teleoperator.img_array, panorama_img)`
+   - 子进程读取: `display_image = self.img_array.copy()`
+
+**用途**: 主进程 (IsaacGym) ↔ VR进程 (OpenTeleVision) 间的高效数据传递
+- **主进程写入**: 渲染的全景图
+- **VR进程读取**: 编码并通过 WebSocket 发送到 VR 客户端
+
 **优势**:
-- 零拷贝: 主进程和VR进程直接访问同一块内存
-- 高效: 无需序列化/反序列化
-- 原子操作: NumPy 数组操作通常是原子的
+- **零拷贝**: 两个进程直接访问同一块物理内存
+- **高效**: 无需序列化/反序列化，无需网络开销
+- **原子操作**: NumPy 数组操作通常是原子的
+- **底层实现**: 使用操作系统共享内存机制（POSIX shm_open/SHM）
 
 **数据大小**:
 - 全景图: `720 × 1440 × 3 = 3,110,400 bytes ≈ 3 MB`
@@ -908,12 +1045,13 @@ hand2inspire = np.array([
 
 ### 6. 异步通信
 
-**VR通信**: 使用 Vuer 框架的异步事件处理
+**VR通信**: 使用 Vuer 框架的异步事件处理 + WebSocket
 
 **优点**:
 - 非阻塞: 主循环不被网络IO阻塞
 - 并发: 多个事件可同时处理
 - 实时性: 低延迟
+- 双向通信: 姿态上行，全景图下行
 
 ### 7. 性能优化
 
@@ -921,9 +1059,10 @@ hand2inspire = np.array([
 - 物理模拟: PhysX 在 GPU 上运行
 - 相机渲染: GPU 纹理渲染
 
-#### 7.2 共享内存
-- 避免进程间数据复制
-- 直接内存访问
+#### 7.2 高效数据传输
+- **共享内存**: 进程间零拷贝传递
+- **WebSocket**: 跨网络实时双向通信
+- **JPEG压缩**: 85质量平衡带宽和质量
 
 #### 7.3 批量操作
 - `set_actor_root_state_tensor()`: 一次性更新所有Actor
