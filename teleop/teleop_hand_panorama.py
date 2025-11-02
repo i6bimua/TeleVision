@@ -426,12 +426,12 @@ if __name__ == '__main__':
             panorama_img = simulator.step(head_rmat, left_pose, right_pose, left_qpos, right_qpos)
             np.copyto(teleoperator.img_array, panorama_img)
             
-            # 调试：保存前几帧全景图
-            if frame_count < 3:
-                from PIL import Image
-                debug_img = Image.fromarray(panorama_img, 'RGB')
-                debug_img.save(f'teleop/panorama_debug_{frame_count}.png')
-                print(f"Debug: Saved panorama frame {frame_count} to teleop/panorama_debug_{frame_count}.png")
+            # 调试：保存前几帧全景图（已禁用）
+            # if frame_count < 3:
+            #     from PIL import Image
+            #     debug_img = Image.fromarray(panorama_img, 'RGB')
+            #     debug_img.save(f'teleop/panorama_debug_{frame_count}.png')
+            #     print(f"Debug: Saved panorama frame {frame_count} to teleop/panorama_debug_{frame_count}.png")
             
             frame_count += 1
     except KeyboardInterrupt:
