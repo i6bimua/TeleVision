@@ -1,0 +1,3602 @@
+=== 延迟监控日志 - 开始时间: 2025-11-02 16:04:49 ===
+
+
+--- 帧 #1 ---
+总延迟: 244.391 ms, 帧率: 4.09 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.237 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.086 ms
+  teleop_build_right_pose: 0.035 ms
+  teleop_hand_retargeting: 5.723 ms
+  sim_physics_simulation: 49.899 ms
+  panorama_camera_setup: 0.056 ms
+  panorama_horizon_conversion: 10.462 ms
+  panorama_equirectangular_conversion: 41.117 ms
+  sim_viewer_render: 106.715 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.081 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 28.684 ms
+  image_shared_memory_write: 1.216 ms
+
+
+--- 帧 #2 ---
+总延迟: 110.706 ms, 帧率: 9.03 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.198 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.101 ms
+  teleop_build_right_pose: 0.042 ms
+  teleop_hand_retargeting: 3.791 ms
+  sim_physics_simulation: 3.794 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.465 ms
+  panorama_equirectangular_conversion: 8.947 ms
+  sim_viewer_render: 78.330 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.656 ms
+  image_shared_memory_write: 0.226 ms
+
+
+--- 帧 #3 ---
+总延迟: 41.239 ms, 帧率: 24.25 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.176 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.042 ms
+  teleop_hand_retargeting: 6.103 ms
+  sim_physics_simulation: 3.303 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 12.749 ms
+  panorama_equirectangular_conversion: 8.748 ms
+  sim_viewer_render: 3.487 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.085 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 6.156 ms
+  image_shared_memory_write: 0.222 ms
+
+
+--- 帧 #4 ---
+总延迟: 36.096 ms, 帧率: 27.70 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.145 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.078 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 4.436 ms
+  sim_physics_simulation: 3.125 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.382 ms
+  panorama_equirectangular_conversion: 8.830 ms
+  sim_viewer_render: 3.415 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.062 ms
+  sim_set_actor_dof_state: 0.016 ms
+  panorama_camera_capture: 6.300 ms
+  image_shared_memory_write: 0.202 ms
+
+
+--- 帧 #5 ---
+总延迟: 35.502 ms, 帧率: 28.17 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.145 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.079 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 4.505 ms
+  sim_physics_simulation: 3.029 ms
+  panorama_camera_setup: 0.039 ms
+  panorama_horizon_conversion: 9.230 ms
+  panorama_equirectangular_conversion: 8.703 ms
+  sim_viewer_render: 3.435 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.064 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.982 ms
+  image_shared_memory_write: 0.205 ms
+
+
+--- 帧 #6 ---
+总延迟: 35.206 ms, 帧率: 28.40 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.158 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.807 ms
+  sim_physics_simulation: 3.045 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.552 ms
+  panorama_equirectangular_conversion: 8.728 ms
+  sim_viewer_render: 3.380 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.062 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 6.057 ms
+  image_shared_memory_write: 0.209 ms
+
+
+--- 帧 #7 ---
+总延迟: 34.986 ms, 帧率: 28.58 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.142 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.079 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.418 ms
+  sim_physics_simulation: 3.077 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.421 ms
+  panorama_equirectangular_conversion: 8.698 ms
+  sim_viewer_render: 3.403 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.095 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.063 ms
+  image_shared_memory_write: 0.469 ms
+
+
+--- 帧 #8 ---
+总延迟: 34.350 ms, 帧率: 29.11 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.269 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.127 ms
+  teleop_build_right_pose: 0.070 ms
+  teleop_hand_retargeting: 3.087 ms
+  sim_physics_simulation: 3.105 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.247 ms
+  panorama_equirectangular_conversion: 8.817 ms
+  sim_viewer_render: 3.325 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.037 ms
+  panorama_camera_capture: 5.878 ms
+  image_shared_memory_write: 0.251 ms
+
+
+--- 帧 #9 ---
+总延迟: 34.022 ms, 帧率: 29.39 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.157 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.107 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 2.717 ms
+  sim_physics_simulation: 3.076 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.329 ms
+  panorama_equirectangular_conversion: 9.403 ms
+  sim_viewer_render: 3.388 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.457 ms
+  image_shared_memory_write: 0.200 ms
+
+
+--- 帧 #10 ---
+总延迟: 32.653 ms, 帧率: 30.63 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.154 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.081 ms
+  teleop_build_right_pose: 0.036 ms
+  teleop_hand_retargeting: 1.640 ms
+  sim_physics_simulation: 3.039 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.380 ms
+  panorama_equirectangular_conversion: 8.799 ms
+  sim_viewer_render: 3.375 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.061 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.781 ms
+  image_shared_memory_write: 0.228 ms
+
+
+--- 帧 #11 ---
+总延迟: 44.805 ms, 帧率: 22.32 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.148 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.093 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 1.848 ms
+  sim_physics_simulation: 3.079 ms
+  panorama_camera_setup: 0.043 ms
+  panorama_horizon_conversion: 19.912 ms
+  panorama_equirectangular_conversion: 9.310 ms
+  sim_viewer_render: 3.558 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.075 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.433 ms
+  image_shared_memory_write: 0.209 ms
+
+
+--- 帧 #12 ---
+总延迟: 34.284 ms, 帧率: 29.17 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 1.799 ms
+  sim_physics_simulation: 3.816 ms
+  panorama_camera_setup: 0.038 ms
+  panorama_horizon_conversion: 9.592 ms
+  panorama_equirectangular_conversion: 8.909 ms
+  sim_viewer_render: 3.352 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.069 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.167 ms
+  image_shared_memory_write: 0.208 ms
+
+
+--- 帧 #13 ---
+总延迟: 33.677 ms, 帧率: 29.69 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.177 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.091 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 1.775 ms
+  sim_physics_simulation: 3.081 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.507 ms
+  panorama_equirectangular_conversion: 9.138 ms
+  sim_viewer_render: 3.366 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.069 ms
+  sim_set_actor_dof_state: 0.026 ms
+  panorama_camera_capture: 5.779 ms
+  image_shared_memory_write: 0.552 ms
+
+
+--- 帧 #14 ---
+总延迟: 39.133 ms, 帧率: 25.55 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.311 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.146 ms
+  teleop_build_right_pose: 0.076 ms
+  teleop_hand_retargeting: 4.321 ms
+  sim_physics_simulation: 3.191 ms
+  panorama_camera_setup: 0.047 ms
+  panorama_horizon_conversion: 9.563 ms
+  panorama_equirectangular_conversion: 9.837 ms
+  sim_viewer_render: 4.175 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 7.144 ms
+  image_shared_memory_write: 0.194 ms
+
+
+--- 帧 #15 ---
+总延迟: 34.531 ms, 帧率: 28.96 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.174 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.089 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 2.233 ms
+  sim_physics_simulation: 3.523 ms
+  panorama_camera_setup: 0.039 ms
+  panorama_horizon_conversion: 9.583 ms
+  panorama_equirectangular_conversion: 8.875 ms
+  sim_viewer_render: 3.797 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.069 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.833 ms
+  image_shared_memory_write: 0.222 ms
+
+
+--- 帧 #16 ---
+总延迟: 35.968 ms, 帧率: 27.80 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.157 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.087 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 2.260 ms
+  sim_physics_simulation: 3.208 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.681 ms
+  panorama_equirectangular_conversion: 10.310 ms
+  sim_viewer_render: 3.513 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.081 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 6.150 ms
+  image_shared_memory_write: 0.384 ms
+
+
+--- 帧 #17 ---
+总延迟: 38.240 ms, 帧率: 26.15 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.272 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.134 ms
+  teleop_build_right_pose: 0.072 ms
+  teleop_hand_retargeting: 6.263 ms
+  sim_physics_simulation: 3.131 ms
+  panorama_camera_setup: 0.038 ms
+  panorama_horizon_conversion: 9.416 ms
+  panorama_equirectangular_conversion: 9.208 ms
+  sim_viewer_render: 3.873 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.071 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.527 ms
+  image_shared_memory_write: 0.181 ms
+
+
+--- 帧 #18 ---
+总延迟: 34.452 ms, 帧率: 29.03 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.162 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 2.261 ms
+  sim_physics_simulation: 4.387 ms
+  panorama_camera_setup: 0.037 ms
+  panorama_horizon_conversion: 9.278 ms
+  panorama_equirectangular_conversion: 9.065 ms
+  sim_viewer_render: 3.329 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.481 ms
+  image_shared_memory_write: 0.218 ms
+
+
+--- 帧 #19 ---
+总延迟: 34.899 ms, 帧率: 28.65 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 2.590 ms
+  sim_physics_simulation: 3.954 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.512 ms
+  panorama_equirectangular_conversion: 9.143 ms
+  sim_viewer_render: 3.292 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.459 ms
+  image_shared_memory_write: 0.518 ms
+
+
+--- 帧 #20 ---
+总延迟: 34.612 ms, 帧率: 28.89 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.278 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.130 ms
+  teleop_build_right_pose: 0.072 ms
+  teleop_hand_retargeting: 2.714 ms
+  sim_physics_simulation: 3.117 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.382 ms
+  panorama_equirectangular_conversion: 9.475 ms
+  sim_viewer_render: 3.389 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.435 ms
+  image_shared_memory_write: 0.476 ms
+
+
+--- 帧 #21 ---
+总延迟: 33.115 ms, 帧率: 30.20 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.144 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.081 ms
+  teleop_build_right_pose: 0.076 ms
+  teleop_hand_retargeting: 2.774 ms
+  sim_physics_simulation: 3.019 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.293 ms
+  panorama_equirectangular_conversion: 8.656 ms
+  sim_viewer_render: 3.290 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.064 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.413 ms
+  image_shared_memory_write: 0.225 ms
+
+
+--- 帧 #22 ---
+总延迟: 33.494 ms, 帧率: 29.86 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.142 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.079 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 2.620 ms
+  sim_physics_simulation: 3.061 ms
+  panorama_camera_setup: 0.042 ms
+  panorama_horizon_conversion: 9.260 ms
+  panorama_equirectangular_conversion: 8.844 ms
+  sim_viewer_render: 3.318 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.062 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.802 ms
+  image_shared_memory_write: 0.180 ms
+
+
+--- 帧 #23 ---
+总延迟: 34.107 ms, 帧率: 29.32 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.159 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 2.587 ms
+  sim_physics_simulation: 2.992 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.415 ms
+  panorama_equirectangular_conversion: 8.878 ms
+  sim_viewer_render: 3.641 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.962 ms
+  image_shared_memory_write: 0.215 ms
+
+
+--- 帧 #24 ---
+总延迟: 33.976 ms, 帧率: 29.43 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.160 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.097 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 2.694 ms
+  sim_physics_simulation: 3.043 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.259 ms
+  panorama_equirectangular_conversion: 8.817 ms
+  sim_viewer_render: 3.604 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.912 ms
+  image_shared_memory_write: 0.209 ms
+
+
+--- 帧 #25 ---
+总延迟: 34.116 ms, 帧率: 29.31 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.145 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.093 ms
+  teleop_build_right_pose: 0.041 ms
+  teleop_hand_retargeting: 2.477 ms
+  sim_physics_simulation: 3.014 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.320 ms
+  panorama_equirectangular_conversion: 8.793 ms
+  sim_viewer_render: 3.443 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.072 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.441 ms
+  image_shared_memory_write: 0.198 ms
+
+
+--- 帧 #26 ---
+总延迟: 34.319 ms, 帧率: 29.14 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.150 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.099 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.679 ms
+  sim_physics_simulation: 3.007 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.230 ms
+  panorama_equirectangular_conversion: 8.585 ms
+  sim_viewer_render: 3.340 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.846 ms
+  image_shared_memory_write: 0.200 ms
+
+
+--- 帧 #27 ---
+总延迟: 35.652 ms, 帧率: 28.05 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.143 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.045 ms
+  teleop_hand_retargeting: 3.631 ms
+  sim_physics_simulation: 3.001 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.245 ms
+  panorama_equirectangular_conversion: 8.694 ms
+  sim_viewer_render: 3.775 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.684 ms
+  image_shared_memory_write: 0.206 ms
+
+
+--- 帧 #28 ---
+总延迟: 35.322 ms, 帧率: 28.31 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.141 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.079 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.602 ms
+  sim_physics_simulation: 3.161 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.495 ms
+  panorama_equirectangular_conversion: 8.633 ms
+  sim_viewer_render: 3.808 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.061 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.030 ms
+  image_shared_memory_write: 0.191 ms
+
+
+--- 帧 #29 ---
+总延迟: 34.620 ms, 帧率: 28.88 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.160 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.083 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.655 ms
+  sim_physics_simulation: 3.330 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.221 ms
+  panorama_equirectangular_conversion: 8.696 ms
+  sim_viewer_render: 3.314 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.780 ms
+  image_shared_memory_write: 0.198 ms
+
+
+--- 帧 #30 ---
+总延迟: 34.215 ms, 帧率: 29.23 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.146 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.080 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.747 ms
+  sim_physics_simulation: 3.015 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.194 ms
+  panorama_equirectangular_conversion: 8.673 ms
+  sim_viewer_render: 3.336 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.636 ms
+  image_shared_memory_write: 0.195 ms
+
+
+--- 帧 #31 ---
+总延迟: 34.933 ms, 帧率: 28.63 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.168 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.603 ms
+  sim_physics_simulation: 3.147 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.319 ms
+  panorama_equirectangular_conversion: 8.690 ms
+  sim_viewer_render: 3.764 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.785 ms
+  image_shared_memory_write: 0.185 ms
+
+
+--- 帧 #32 ---
+总延迟: 36.466 ms, 帧率: 27.42 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.078 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.629 ms
+  sim_physics_simulation: 3.214 ms
+  panorama_camera_setup: 0.031 ms
+  panorama_horizon_conversion: 9.415 ms
+  panorama_equirectangular_conversion: 9.064 ms
+  sim_viewer_render: 3.849 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.062 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 6.650 ms
+  image_shared_memory_write: 0.225 ms
+
+
+--- 帧 #33 ---
+总延迟: 35.962 ms, 帧率: 27.81 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.144 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.079 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.751 ms
+  sim_physics_simulation: 3.315 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.333 ms
+  panorama_equirectangular_conversion: 9.458 ms
+  sim_viewer_render: 3.482 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.028 ms
+  image_shared_memory_write: 0.189 ms
+
+
+--- 帧 #34 ---
+总延迟: 35.161 ms, 帧率: 28.44 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.149 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.095 ms
+  teleop_build_right_pose: 0.041 ms
+  teleop_hand_retargeting: 3.736 ms
+  sim_physics_simulation: 3.034 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.275 ms
+  panorama_equirectangular_conversion: 8.615 ms
+  sim_viewer_render: 3.649 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.062 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 6.247 ms
+  image_shared_memory_write: 0.180 ms
+
+
+--- 帧 #35 ---
+总延迟: 34.574 ms, 帧率: 28.92 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.142 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.554 ms
+  sim_physics_simulation: 3.199 ms
+  panorama_camera_setup: 0.031 ms
+  panorama_horizon_conversion: 9.111 ms
+  panorama_equirectangular_conversion: 8.645 ms
+  sim_viewer_render: 3.880 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.560 ms
+  image_shared_memory_write: 0.221 ms
+
+
+--- 帧 #36 ---
+总延迟: 36.220 ms, 帧率: 27.61 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.154 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.081 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.535 ms
+  sim_physics_simulation: 3.794 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 10.307 ms
+  panorama_equirectangular_conversion: 8.667 ms
+  sim_viewer_render: 3.357 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.941 ms
+  image_shared_memory_write: 0.200 ms
+
+
+--- 帧 #37 ---
+总延迟: 34.282 ms, 帧率: 29.17 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.148 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.080 ms
+  teleop_build_right_pose: 0.042 ms
+  teleop_hand_retargeting: 3.688 ms
+  sim_physics_simulation: 2.993 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.347 ms
+  panorama_equirectangular_conversion: 8.856 ms
+  sim_viewer_render: 3.284 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.513 ms
+  image_shared_memory_write: 0.191 ms
+
+
+--- 帧 #38 ---
+总延迟: 33.642 ms, 帧率: 29.72 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.146 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.078 ms
+  teleop_build_right_pose: 0.037 ms
+  teleop_hand_retargeting: 3.634 ms
+  sim_physics_simulation: 3.005 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.100 ms
+  panorama_equirectangular_conversion: 8.667 ms
+  sim_viewer_render: 3.289 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.061 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.353 ms
+  image_shared_memory_write: 0.191 ms
+
+
+--- 帧 #39 ---
+总延迟: 34.248 ms, 帧率: 29.20 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.157 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.594 ms
+  sim_physics_simulation: 3.002 ms
+  panorama_camera_setup: 0.031 ms
+  panorama_horizon_conversion: 9.108 ms
+  panorama_equirectangular_conversion: 9.170 ms
+  sim_viewer_render: 3.350 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.395 ms
+  image_shared_memory_write: 0.196 ms
+
+
+--- 帧 #40 ---
+总延迟: 33.815 ms, 帧率: 29.57 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.171 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.080 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.611 ms
+  sim_physics_simulation: 2.996 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.222 ms
+  panorama_equirectangular_conversion: 8.754 ms
+  sim_viewer_render: 3.286 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.334 ms
+  image_shared_memory_write: 0.183 ms
+
+
+--- 帧 #41 ---
+总延迟: 33.949 ms, 帧率: 29.46 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.149 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.078 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.579 ms
+  sim_physics_simulation: 2.984 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.068 ms
+  panorama_equirectangular_conversion: 9.002 ms
+  sim_viewer_render: 3.318 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.011 ms
+  panorama_camera_capture: 5.368 ms
+  image_shared_memory_write: 0.221 ms
+
+
+--- 帧 #42 ---
+总延迟: 33.909 ms, 帧率: 29.49 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.080 ms
+  teleop_build_right_pose: 0.037 ms
+  teleop_hand_retargeting: 3.634 ms
+  sim_physics_simulation: 3.006 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.060 ms
+  panorama_equirectangular_conversion: 8.723 ms
+  sim_viewer_render: 3.340 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.535 ms
+  image_shared_memory_write: 0.203 ms
+
+
+--- 帧 #43 ---
+总延迟: 34.548 ms, 帧率: 28.95 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.163 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.081 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.676 ms
+  sim_physics_simulation: 2.995 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.254 ms
+  panorama_equirectangular_conversion: 8.807 ms
+  sim_viewer_render: 3.317 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.022 ms
+  panorama_camera_capture: 5.858 ms
+  image_shared_memory_write: 0.200 ms
+
+
+--- 帧 #44 ---
+总延迟: 34.860 ms, 帧率: 28.69 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.163 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.091 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.639 ms
+  sim_physics_simulation: 2.996 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.260 ms
+  panorama_equirectangular_conversion: 8.875 ms
+  sim_viewer_render: 3.475 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.073 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.935 ms
+  image_shared_memory_write: 0.223 ms
+
+
+--- 帧 #45 ---
+总延迟: 34.832 ms, 帧率: 28.71 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.143 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.080 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.656 ms
+  sim_physics_simulation: 3.037 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.084 ms
+  panorama_equirectangular_conversion: 9.255 ms
+  sim_viewer_render: 3.458 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.732 ms
+  image_shared_memory_write: 0.203 ms
+
+
+--- 帧 #46 ---
+总延迟: 33.794 ms, 帧率: 29.59 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.144 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.081 ms
+  teleop_build_right_pose: 0.037 ms
+  teleop_hand_retargeting: 3.559 ms
+  sim_physics_simulation: 3.009 ms
+  panorama_camera_setup: 0.047 ms
+  panorama_horizon_conversion: 9.102 ms
+  panorama_equirectangular_conversion: 8.772 ms
+  sim_viewer_render: 3.265 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.062 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.472 ms
+  image_shared_memory_write: 0.200 ms
+
+
+--- 帧 #47 ---
+总延迟: 34.016 ms, 帧率: 29.40 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.164 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.081 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.667 ms
+  sim_physics_simulation: 2.972 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.102 ms
+  panorama_equirectangular_conversion: 8.740 ms
+  sim_viewer_render: 3.426 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.062 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.479 ms
+  image_shared_memory_write: 0.198 ms
+
+
+--- 帧 #48 ---
+总延迟: 33.914 ms, 帧率: 29.49 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.144 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.095 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.561 ms
+  sim_physics_simulation: 2.982 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.145 ms
+  panorama_equirectangular_conversion: 8.755 ms
+  sim_viewer_render: 3.364 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.061 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.455 ms
+  image_shared_memory_write: 0.238 ms
+
+
+--- 帧 #49 ---
+总延迟: 35.906 ms, 帧率: 27.85 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.145 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.036 ms
+  teleop_hand_retargeting: 3.567 ms
+  sim_physics_simulation: 3.041 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.786 ms
+  panorama_equirectangular_conversion: 9.674 ms
+  sim_viewer_render: 3.436 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.073 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.750 ms
+  image_shared_memory_write: 0.230 ms
+
+
+--- 帧 #50 ---
+总延迟: 39.211 ms, 帧率: 25.50 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.197 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.108 ms
+  teleop_build_right_pose: 0.056 ms
+  teleop_hand_retargeting: 5.632 ms
+  sim_physics_simulation: 3.090 ms
+  panorama_camera_setup: 0.039 ms
+  panorama_horizon_conversion: 9.472 ms
+  panorama_equirectangular_conversion: 9.359 ms
+  sim_viewer_render: 4.070 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 6.853 ms
+  image_shared_memory_write: 0.214 ms
+
+
+--- 帧 #51 ---
+总延迟: 37.398 ms, 帧率: 26.74 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.170 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.790 ms
+  sim_physics_simulation: 3.523 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.563 ms
+  panorama_equirectangular_conversion: 9.388 ms
+  sim_viewer_render: 3.684 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.092 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 6.774 ms
+  image_shared_memory_write: 0.200 ms
+
+
+--- 帧 #52 ---
+总延迟: 36.620 ms, 帧率: 27.31 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.154 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.778 ms
+  sim_physics_simulation: 3.104 ms
+  panorama_camera_setup: 0.037 ms
+  panorama_horizon_conversion: 9.725 ms
+  panorama_equirectangular_conversion: 8.952 ms
+  sim_viewer_render: 3.499 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.071 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 6.916 ms
+  image_shared_memory_write: 0.206 ms
+
+
+--- 帧 #53 ---
+总延迟: 35.584 ms, 帧率: 28.10 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.186 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.043 ms
+  teleop_hand_retargeting: 3.793 ms
+  sim_physics_simulation: 3.070 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.449 ms
+  panorama_equirectangular_conversion: 9.006 ms
+  sim_viewer_render: 3.530 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 6.048 ms
+  image_shared_memory_write: 0.221 ms
+
+
+--- 帧 #54 ---
+总延迟: 37.613 ms, 帧率: 26.59 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.168 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.083 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.853 ms
+  sim_physics_simulation: 3.438 ms
+  panorama_camera_setup: 0.037 ms
+  panorama_horizon_conversion: 10.770 ms
+  panorama_equirectangular_conversion: 9.417 ms
+  sim_viewer_render: 3.400 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.074 ms
+  sim_set_actor_dof_state: 0.016 ms
+  panorama_camera_capture: 6.024 ms
+  image_shared_memory_write: 0.257 ms
+
+
+--- 帧 #55 ---
+总延迟: 36.204 ms, 帧率: 27.62 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.167 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.747 ms
+  sim_physics_simulation: 3.105 ms
+  panorama_camera_setup: 0.037 ms
+  panorama_horizon_conversion: 9.519 ms
+  panorama_equirectangular_conversion: 9.022 ms
+  sim_viewer_render: 3.397 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.747 ms
+  image_shared_memory_write: 0.220 ms
+
+
+--- 帧 #56 ---
+总延迟: 36.004 ms, 帧率: 27.77 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.161 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.089 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.790 ms
+  sim_physics_simulation: 3.444 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.772 ms
+  panorama_equirectangular_conversion: 9.011 ms
+  sim_viewer_render: 3.335 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.975 ms
+  image_shared_memory_write: 0.235 ms
+
+
+--- 帧 #57 ---
+总延迟: 36.118 ms, 帧率: 27.69 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.086 ms
+  teleop_build_right_pose: 0.057 ms
+  teleop_hand_retargeting: 3.762 ms
+  sim_physics_simulation: 3.078 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.455 ms
+  panorama_equirectangular_conversion: 9.172 ms
+  sim_viewer_render: 3.467 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 6.548 ms
+  image_shared_memory_write: 0.190 ms
+
+
+--- 帧 #58 ---
+总延迟: 35.654 ms, 帧率: 28.05 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.158 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.041 ms
+  teleop_hand_retargeting: 3.799 ms
+  sim_physics_simulation: 3.042 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.519 ms
+  panorama_equirectangular_conversion: 9.117 ms
+  sim_viewer_render: 3.404 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.075 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.125 ms
+  image_shared_memory_write: 0.206 ms
+
+
+--- 帧 #59 ---
+总延迟: 35.049 ms, 帧率: 28.53 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.150 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.095 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.788 ms
+  sim_physics_simulation: 3.048 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.534 ms
+  panorama_equirectangular_conversion: 9.143 ms
+  sim_viewer_render: 3.178 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.072 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.695 ms
+  image_shared_memory_write: 0.220 ms
+
+
+--- 帧 #60 ---
+总延迟: 35.233 ms, 帧率: 28.38 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.100 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.877 ms
+  sim_physics_simulation: 3.047 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.469 ms
+  panorama_equirectangular_conversion: 9.132 ms
+  sim_viewer_render: 3.406 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.646 ms
+  image_shared_memory_write: 0.209 ms
+
+
+--- 帧 #61 ---
+总延迟: 34.444 ms, 帧率: 29.03 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.153 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.722 ms
+  sim_physics_simulation: 3.056 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.315 ms
+  panorama_equirectangular_conversion: 8.660 ms
+  sim_viewer_render: 3.324 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.747 ms
+  image_shared_memory_write: 0.195 ms
+
+
+--- 帧 #62 ---
+总延迟: 35.658 ms, 帧率: 28.04 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.149 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.108 ms
+  teleop_build_right_pose: 0.046 ms
+  teleop_hand_retargeting: 3.745 ms
+  sim_physics_simulation: 3.038 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.483 ms
+  panorama_equirectangular_conversion: 9.315 ms
+  sim_viewer_render: 3.327 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.104 ms
+  image_shared_memory_write: 0.199 ms
+
+
+--- 帧 #63 ---
+总延迟: 35.233 ms, 帧率: 28.38 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.157 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.087 ms
+  teleop_build_right_pose: 0.041 ms
+  teleop_hand_retargeting: 3.832 ms
+  sim_physics_simulation: 3.046 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.476 ms
+  panorama_equirectangular_conversion: 9.246 ms
+  sim_viewer_render: 3.362 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.069 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.593 ms
+  image_shared_memory_write: 0.230 ms
+
+
+--- 帧 #64 ---
+总延迟: 35.251 ms, 帧率: 28.37 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.155 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.044 ms
+  teleop_hand_retargeting: 3.762 ms
+  sim_physics_simulation: 3.029 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.450 ms
+  panorama_equirectangular_conversion: 9.249 ms
+  sim_viewer_render: 3.268 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.868 ms
+  image_shared_memory_write: 0.197 ms
+
+
+--- 帧 #65 ---
+总延迟: 35.563 ms, 帧率: 28.12 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.164 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.083 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.753 ms
+  sim_physics_simulation: 3.048 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.694 ms
+  panorama_equirectangular_conversion: 9.078 ms
+  sim_viewer_render: 3.336 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.073 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.010 ms
+  image_shared_memory_write: 0.202 ms
+
+
+--- 帧 #66 ---
+总延迟: 35.057 ms, 帧率: 28.53 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.157 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.079 ms
+  teleop_build_right_pose: 0.044 ms
+  teleop_hand_retargeting: 3.742 ms
+  sim_physics_simulation: 3.028 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.601 ms
+  panorama_equirectangular_conversion: 8.714 ms
+  sim_viewer_render: 3.350 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.062 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.996 ms
+  image_shared_memory_write: 0.204 ms
+
+
+--- 帧 #67 ---
+总延迟: 35.648 ms, 帧率: 28.05 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.107 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.684 ms
+  sim_physics_simulation: 3.008 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.490 ms
+  panorama_equirectangular_conversion: 9.267 ms
+  sim_viewer_render: 3.495 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.069 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.849 ms
+  image_shared_memory_write: 0.397 ms
+
+
+--- 帧 #68 ---
+总延迟: 41.026 ms, 帧率: 24.37 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.268 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.134 ms
+  teleop_build_right_pose: 0.071 ms
+  teleop_hand_retargeting: 9.881 ms
+  sim_physics_simulation: 3.156 ms
+  panorama_camera_setup: 0.040 ms
+  panorama_horizon_conversion: 9.285 ms
+  panorama_equirectangular_conversion: 8.674 ms
+  sim_viewer_render: 3.315 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.113 ms
+  sim_set_actor_dof_state: 0.026 ms
+  panorama_camera_capture: 5.828 ms
+  image_shared_memory_write: 0.193 ms
+
+
+--- 帧 #69 ---
+总延迟: 49.449 ms, 帧率: 20.22 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.142 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.077 ms
+  teleop_build_right_pose: 0.043 ms
+  teleop_hand_retargeting: 3.721 ms
+  sim_physics_simulation: 3.286 ms
+  panorama_camera_setup: 0.049 ms
+  panorama_horizon_conversion: 18.949 ms
+  panorama_equirectangular_conversion: 9.700 ms
+  sim_viewer_render: 5.312 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 7.460 ms
+  image_shared_memory_write: 0.575 ms
+
+
+--- 帧 #70 ---
+总延迟: 48.220 ms, 帧率: 20.74 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.282 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.136 ms
+  teleop_build_right_pose: 0.072 ms
+  teleop_hand_retargeting: 10.339 ms
+  sim_physics_simulation: 3.671 ms
+  panorama_camera_setup: 0.093 ms
+  panorama_horizon_conversion: 9.715 ms
+  panorama_equirectangular_conversion: 9.784 ms
+  sim_viewer_render: 4.515 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.130 ms
+  sim_set_actor_dof_state: 0.027 ms
+  panorama_camera_capture: 8.837 ms
+  image_shared_memory_write: 0.562 ms
+
+
+--- 帧 #71 ---
+总延迟: 63.006 ms, 帧率: 15.87 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.280 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.160 ms
+  teleop_build_right_pose: 0.072 ms
+  teleop_hand_retargeting: 10.314 ms
+  sim_physics_simulation: 4.729 ms
+  panorama_camera_setup: 0.068 ms
+  panorama_horizon_conversion: 19.304 ms
+  panorama_equirectangular_conversion: 16.117 ms
+  sim_viewer_render: 3.558 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.144 ms
+  sim_set_actor_dof_state: 0.033 ms
+  panorama_camera_capture: 7.565 ms
+  image_shared_memory_write: 0.591 ms
+
+
+--- 帧 #72 ---
+总延迟: 63.442 ms, 帧率: 15.76 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.299 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.136 ms
+  teleop_build_right_pose: 0.071 ms
+  teleop_hand_retargeting: 10.462 ms
+  sim_physics_simulation: 4.285 ms
+  panorama_camera_setup: 0.081 ms
+  panorama_horizon_conversion: 20.144 ms
+  panorama_equirectangular_conversion: 16.681 ms
+  sim_viewer_render: 3.460 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.140 ms
+  sim_set_actor_dof_state: 0.031 ms
+  panorama_camera_capture: 7.068 ms
+  image_shared_memory_write: 0.512 ms
+
+
+--- 帧 #73 ---
+总延迟: 44.843 ms, 帧率: 22.30 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.284 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.131 ms
+  teleop_build_right_pose: 0.070 ms
+  teleop_hand_retargeting: 5.501 ms
+  sim_physics_simulation: 3.196 ms
+  panorama_camera_setup: 0.053 ms
+  panorama_horizon_conversion: 13.808 ms
+  panorama_equirectangular_conversion: 9.607 ms
+  sim_viewer_render: 3.576 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.081 ms
+  sim_set_actor_dof_state: 0.016 ms
+  panorama_camera_capture: 8.247 ms
+  image_shared_memory_write: 0.216 ms
+
+
+--- 帧 #74 ---
+总延迟: 36.198 ms, 帧率: 27.63 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.158 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.036 ms
+  teleop_hand_retargeting: 3.822 ms
+  sim_physics_simulation: 3.315 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.803 ms
+  panorama_equirectangular_conversion: 9.244 ms
+  sim_viewer_render: 3.331 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.732 ms
+  image_shared_memory_write: 0.511 ms
+
+
+--- 帧 #75 ---
+总延迟: 39.464 ms, 帧率: 25.34 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.278 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.129 ms
+  teleop_build_right_pose: 0.087 ms
+  teleop_hand_retargeting: 7.741 ms
+  sim_physics_simulation: 3.076 ms
+  panorama_camera_setup: 0.040 ms
+  panorama_horizon_conversion: 9.503 ms
+  panorama_equirectangular_conversion: 9.429 ms
+  sim_viewer_render: 3.471 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.079 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.344 ms
+  image_shared_memory_write: 0.217 ms
+
+
+--- 帧 #76 ---
+总延迟: 34.280 ms, 帧率: 29.17 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.156 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.086 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.686 ms
+  sim_physics_simulation: 3.055 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.489 ms
+  panorama_equirectangular_conversion: 9.189 ms
+  sim_viewer_render: 3.334 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 4.880 ms
+  image_shared_memory_write: 0.211 ms
+
+
+--- 帧 #77 ---
+总延迟: 36.064 ms, 帧率: 27.73 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.165 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.087 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.774 ms
+  sim_physics_simulation: 3.066 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.503 ms
+  panorama_equirectangular_conversion: 8.971 ms
+  sim_viewer_render: 3.426 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.072 ms
+  sim_set_actor_dof_state: 0.016 ms
+  panorama_camera_capture: 6.646 ms
+  image_shared_memory_write: 0.225 ms
+
+
+--- 帧 #78 ---
+总延迟: 35.702 ms, 帧率: 28.01 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.180 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.091 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.763 ms
+  sim_physics_simulation: 3.055 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.364 ms
+  panorama_equirectangular_conversion: 9.525 ms
+  sim_viewer_render: 3.462 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.016 ms
+  panorama_camera_capture: 5.850 ms
+  image_shared_memory_write: 0.217 ms
+
+
+--- 帧 #79 ---
+总延迟: 35.221 ms, 帧率: 28.39 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.183 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 4.129 ms
+  sim_physics_simulation: 3.026 ms
+  panorama_camera_setup: 0.038 ms
+  panorama_horizon_conversion: 9.388 ms
+  panorama_equirectangular_conversion: 8.952 ms
+  sim_viewer_render: 3.453 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.070 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.605 ms
+  image_shared_memory_write: 0.199 ms
+
+
+--- 帧 #80 ---
+总延迟: 35.637 ms, 帧率: 28.06 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.155 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.086 ms
+  teleop_build_right_pose: 0.045 ms
+  teleop_hand_retargeting: 3.728 ms
+  sim_physics_simulation: 3.176 ms
+  panorama_camera_setup: 0.037 ms
+  panorama_horizon_conversion: 9.698 ms
+  panorama_equirectangular_conversion: 9.400 ms
+  sim_viewer_render: 3.368 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.088 ms
+  sim_set_actor_dof_state: 0.021 ms
+  panorama_camera_capture: 5.602 ms
+  image_shared_memory_write: 0.195 ms
+
+
+--- 帧 #81 ---
+总延迟: 34.885 ms, 帧率: 28.67 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.658 ms
+  sim_physics_simulation: 3.023 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.431 ms
+  panorama_equirectangular_conversion: 9.357 ms
+  sim_viewer_render: 3.438 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.332 ms
+  image_shared_memory_write: 0.219 ms
+
+
+--- 帧 #82 ---
+总延迟: 35.842 ms, 帧率: 27.90 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.168 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.092 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.805 ms
+  sim_physics_simulation: 3.039 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.337 ms
+  panorama_equirectangular_conversion: 9.658 ms
+  sim_viewer_render: 3.448 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.905 ms
+  image_shared_memory_write: 0.198 ms
+
+
+--- 帧 #83 ---
+总延迟: 35.434 ms, 帧率: 28.22 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.154 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.083 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.746 ms
+  sim_physics_simulation: 3.089 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.344 ms
+  panorama_equirectangular_conversion: 9.470 ms
+  sim_viewer_render: 3.350 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.069 ms
+  sim_set_actor_dof_state: 0.016 ms
+  panorama_camera_capture: 5.777 ms
+  image_shared_memory_write: 0.221 ms
+
+
+--- 帧 #84 ---
+总延迟: 37.127 ms, 帧率: 26.93 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.174 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.041 ms
+  teleop_hand_retargeting: 3.743 ms
+  sim_physics_simulation: 3.129 ms
+  panorama_camera_setup: 0.037 ms
+  panorama_horizon_conversion: 10.053 ms
+  panorama_equirectangular_conversion: 9.582 ms
+  sim_viewer_render: 3.382 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.566 ms
+  image_shared_memory_write: 0.210 ms
+
+
+--- 帧 #85 ---
+总延迟: 35.997 ms, 帧率: 27.78 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.160 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.088 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.813 ms
+  sim_physics_simulation: 3.084 ms
+  panorama_camera_setup: 0.046 ms
+  panorama_horizon_conversion: 9.559 ms
+  panorama_equirectangular_conversion: 9.354 ms
+  sim_viewer_render: 3.350 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.071 ms
+  sim_set_actor_dof_state: 0.016 ms
+  panorama_camera_capture: 6.151 ms
+  image_shared_memory_write: 0.229 ms
+
+
+--- 帧 #86 ---
+总延迟: 36.615 ms, 帧率: 27.31 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.187 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.041 ms
+  teleop_hand_retargeting: 3.897 ms
+  sim_physics_simulation: 3.078 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.554 ms
+  panorama_equirectangular_conversion: 10.052 ms
+  sim_viewer_render: 3.456 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.017 ms
+  panorama_camera_capture: 5.924 ms
+  image_shared_memory_write: 0.186 ms
+
+
+--- 帧 #87 ---
+总延迟: 35.315 ms, 帧率: 28.32 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.159 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.088 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.712 ms
+  sim_physics_simulation: 3.030 ms
+  panorama_camera_setup: 0.038 ms
+  panorama_horizon_conversion: 9.452 ms
+  panorama_equirectangular_conversion: 9.212 ms
+  sim_viewer_render: 3.358 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.069 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.871 ms
+  image_shared_memory_write: 0.237 ms
+
+
+--- 帧 #88 ---
+总延迟: 35.892 ms, 帧率: 27.86 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.158 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.113 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.890 ms
+  sim_physics_simulation: 3.060 ms
+  panorama_camera_setup: 0.048 ms
+  panorama_horizon_conversion: 9.453 ms
+  panorama_equirectangular_conversion: 9.196 ms
+  sim_viewer_render: 3.286 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 6.041 ms
+  image_shared_memory_write: 0.475 ms
+
+
+--- 帧 #89 ---
+总延迟: 39.719 ms, 帧率: 25.18 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.272 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.127 ms
+  teleop_build_right_pose: 0.072 ms
+  teleop_hand_retargeting: 7.013 ms
+  sim_physics_simulation: 3.088 ms
+  panorama_camera_setup: 0.039 ms
+  panorama_horizon_conversion: 9.612 ms
+  panorama_equirectangular_conversion: 9.390 ms
+  sim_viewer_render: 3.533 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.072 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.209 ms
+  image_shared_memory_write: 0.236 ms
+
+
+--- 帧 #90 ---
+总延迟: 35.659 ms, 帧率: 28.04 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.162 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.086 ms
+  teleop_build_right_pose: 0.047 ms
+  teleop_hand_retargeting: 3.776 ms
+  sim_physics_simulation: 3.083 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.674 ms
+  panorama_equirectangular_conversion: 9.219 ms
+  sim_viewer_render: 3.330 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.935 ms
+  image_shared_memory_write: 0.193 ms
+
+
+--- 帧 #91 ---
+总延迟: 35.295 ms, 帧率: 28.33 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.154 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.087 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.727 ms
+  sim_physics_simulation: 2.998 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.471 ms
+  panorama_equirectangular_conversion: 9.032 ms
+  sim_viewer_render: 3.330 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.070 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.074 ms
+  image_shared_memory_write: 0.232 ms
+
+
+--- 帧 #92 ---
+总延迟: 35.164 ms, 帧率: 28.44 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.148 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.510 ms
+  sim_physics_simulation: 3.019 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.393 ms
+  panorama_equirectangular_conversion: 9.293 ms
+  sim_viewer_render: 3.354 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.983 ms
+  image_shared_memory_write: 0.198 ms
+
+
+--- 帧 #93 ---
+总延迟: 34.277 ms, 帧率: 29.17 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.171 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.080 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.553 ms
+  sim_physics_simulation: 2.969 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 8.980 ms
+  panorama_equirectangular_conversion: 8.635 ms
+  sim_viewer_render: 3.471 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.064 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.006 ms
+  image_shared_memory_write: 0.217 ms
+
+
+--- 帧 #94 ---
+总延迟: 34.228 ms, 帧率: 29.22 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.143 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.047 ms
+  teleop_hand_retargeting: 3.625 ms
+  sim_physics_simulation: 3.038 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.098 ms
+  panorama_equirectangular_conversion: 8.688 ms
+  sim_viewer_render: 3.330 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.064 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.811 ms
+  image_shared_memory_write: 0.220 ms
+
+
+--- 帧 #95 ---
+总延迟: 34.729 ms, 帧率: 28.79 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.705 ms
+  sim_physics_simulation: 2.995 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.120 ms
+  panorama_equirectangular_conversion: 8.996 ms
+  sim_viewer_render: 3.347 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.943 ms
+  image_shared_memory_write: 0.211 ms
+
+
+--- 帧 #96 ---
+总延迟: 34.234 ms, 帧率: 29.21 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.171 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.086 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.535 ms
+  sim_physics_simulation: 2.978 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.140 ms
+  panorama_equirectangular_conversion: 9.321 ms
+  sim_viewer_render: 3.475 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.129 ms
+  image_shared_memory_write: 0.212 ms
+
+
+--- 帧 #97 ---
+总延迟: 35.570 ms, 帧率: 28.11 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.155 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.091 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.667 ms
+  sim_physics_simulation: 3.064 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.435 ms
+  panorama_equirectangular_conversion: 8.771 ms
+  sim_viewer_render: 3.574 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.069 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.398 ms
+  image_shared_memory_write: 0.222 ms
+
+
+--- 帧 #98 ---
+总延迟: 36.823 ms, 帧率: 27.16 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.160 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.083 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.690 ms
+  sim_physics_simulation: 3.038 ms
+  panorama_camera_setup: 0.047 ms
+  panorama_horizon_conversion: 9.286 ms
+  panorama_equirectangular_conversion: 8.927 ms
+  sim_viewer_render: 3.917 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.064 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 7.331 ms
+  image_shared_memory_write: 0.194 ms
+
+
+--- 帧 #99 ---
+总延迟: 36.246 ms, 帧率: 27.59 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.148 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.087 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.678 ms
+  sim_physics_simulation: 3.898 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.345 ms
+  panorama_equirectangular_conversion: 9.235 ms
+  sim_viewer_render: 3.403 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.049 ms
+  image_shared_memory_write: 0.215 ms
+
+
+--- 帧 #100 ---
+总延迟: 35.246 ms, 帧率: 28.37 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.148 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.789 ms
+  sim_physics_simulation: 3.034 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.447 ms
+  panorama_equirectangular_conversion: 9.183 ms
+  sim_viewer_render: 3.402 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.064 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.787 ms
+  image_shared_memory_write: 0.189 ms
+
+
+--- 帧 #101 ---
+总延迟: 46.054 ms, 帧率: 21.71 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.150 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.767 ms
+  sim_physics_simulation: 3.013 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 17.740 ms
+  panorama_equirectangular_conversion: 11.138 ms
+  sim_viewer_render: 3.297 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.064 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.480 ms
+  image_shared_memory_write: 0.201 ms
+
+
+--- 帧 #102 ---
+总延迟: 34.995 ms, 帧率: 28.58 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.188 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.077 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 4.339 ms
+  sim_physics_simulation: 3.091 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.248 ms
+  panorama_equirectangular_conversion: 8.671 ms
+  sim_viewer_render: 3.258 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.079 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.720 ms
+  image_shared_memory_write: 0.202 ms
+
+
+--- 帧 #103 ---
+总延迟: 36.029 ms, 帧率: 27.76 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.147 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 4.313 ms
+  sim_physics_simulation: 3.117 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.655 ms
+  panorama_equirectangular_conversion: 9.150 ms
+  sim_viewer_render: 3.306 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.081 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.842 ms
+  image_shared_memory_write: 0.209 ms
+
+
+--- 帧 #104 ---
+总延迟: 35.608 ms, 帧率: 28.08 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.150 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.089 ms
+  teleop_build_right_pose: 0.043 ms
+  teleop_hand_retargeting: 4.134 ms
+  sim_physics_simulation: 3.108 ms
+  panorama_camera_setup: 0.038 ms
+  panorama_horizon_conversion: 9.770 ms
+  panorama_equirectangular_conversion: 9.371 ms
+  sim_viewer_render: 3.406 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.151 ms
+  image_shared_memory_write: 0.232 ms
+
+
+--- 帧 #105 ---
+总延迟: 35.740 ms, 帧率: 27.98 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.197 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.088 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.838 ms
+  sim_physics_simulation: 3.059 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.613 ms
+  panorama_equirectangular_conversion: 9.210 ms
+  sim_viewer_render: 3.455 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.072 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.859 ms
+  image_shared_memory_write: 0.225 ms
+
+
+--- 帧 #106 ---
+总延迟: 35.139 ms, 帧率: 28.46 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.160 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.087 ms
+  teleop_build_right_pose: 0.041 ms
+  teleop_hand_retargeting: 3.758 ms
+  sim_physics_simulation: 3.035 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.497 ms
+  panorama_equirectangular_conversion: 9.253 ms
+  sim_viewer_render: 3.360 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.602 ms
+  image_shared_memory_write: 0.195 ms
+
+
+--- 帧 #107 ---
+总延迟: 35.701 ms, 帧率: 28.01 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.153 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.724 ms
+  sim_physics_simulation: 3.092 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.501 ms
+  panorama_equirectangular_conversion: 9.210 ms
+  sim_viewer_render: 3.313 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.070 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.954 ms
+  image_shared_memory_write: 0.478 ms
+
+
+--- 帧 #108 ---
+总延迟: 35.784 ms, 帧率: 27.95 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.150 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.083 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.919 ms
+  sim_physics_simulation: 3.064 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.394 ms
+  panorama_equirectangular_conversion: 9.313 ms
+  sim_viewer_render: 3.508 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.957 ms
+  image_shared_memory_write: 0.205 ms
+
+
+--- 帧 #109 ---
+总延迟: 37.057 ms, 帧率: 26.99 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.154 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.041 ms
+  teleop_hand_retargeting: 3.888 ms
+  sim_physics_simulation: 3.101 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.621 ms
+  panorama_equirectangular_conversion: 9.760 ms
+  sim_viewer_render: 3.595 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.071 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.449 ms
+  image_shared_memory_write: 0.208 ms
+
+
+--- 帧 #110 ---
+总延迟: 34.856 ms, 帧率: 28.69 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.150 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.079 ms
+  teleop_build_right_pose: 0.037 ms
+  teleop_hand_retargeting: 3.713 ms
+  sim_physics_simulation: 3.014 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.208 ms
+  panorama_equirectangular_conversion: 8.837 ms
+  sim_viewer_render: 3.420 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.061 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.045 ms
+  image_shared_memory_write: 0.207 ms
+
+
+--- 帧 #111 ---
+总延迟: 35.170 ms, 帧率: 28.43 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.145 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.077 ms
+  teleop_build_right_pose: 0.037 ms
+  teleop_hand_retargeting: 3.742 ms
+  sim_physics_simulation: 3.081 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.263 ms
+  panorama_equirectangular_conversion: 9.120 ms
+  sim_viewer_render: 3.467 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.070 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.885 ms
+  image_shared_memory_write: 0.197 ms
+
+
+--- 帧 #112 ---
+总延迟: 33.904 ms, 帧率: 29.50 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.143 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.075 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.545 ms
+  sim_physics_simulation: 2.975 ms
+  panorama_camera_setup: 0.031 ms
+  panorama_horizon_conversion: 8.952 ms
+  panorama_equirectangular_conversion: 8.501 ms
+  sim_viewer_render: 3.275 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.061 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 6.077 ms
+  image_shared_memory_write: 0.190 ms
+
+
+--- 帧 #113 ---
+总延迟: 34.777 ms, 帧率: 28.75 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.146 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.077 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.544 ms
+  sim_physics_simulation: 2.978 ms
+  panorama_camera_setup: 0.031 ms
+  panorama_horizon_conversion: 9.253 ms
+  panorama_equirectangular_conversion: 9.098 ms
+  sim_viewer_render: 3.389 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.064 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.917 ms
+  image_shared_memory_write: 0.199 ms
+
+
+--- 帧 #114 ---
+总延迟: 34.130 ms, 帧率: 29.30 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.146 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.081 ms
+  teleop_build_right_pose: 0.037 ms
+  teleop_hand_retargeting: 3.580 ms
+  sim_physics_simulation: 3.048 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.003 ms
+  panorama_equirectangular_conversion: 8.766 ms
+  sim_viewer_render: 3.343 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.066 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.777 ms
+  image_shared_memory_write: 0.198 ms
+
+
+--- 帧 #115 ---
+总延迟: 33.858 ms, 帧率: 29.54 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.167 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.078 ms
+  teleop_build_right_pose: 0.037 ms
+  teleop_hand_retargeting: 3.561 ms
+  sim_physics_simulation: 3.097 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.069 ms
+  panorama_equirectangular_conversion: 8.626 ms
+  sim_viewer_render: 3.370 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.504 ms
+  image_shared_memory_write: 0.198 ms
+
+
+--- 帧 #116 ---
+总延迟: 35.127 ms, 帧率: 28.47 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.167 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.081 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.683 ms
+  sim_physics_simulation: 3.027 ms
+  panorama_camera_setup: 0.031 ms
+  panorama_horizon_conversion: 9.051 ms
+  panorama_equirectangular_conversion: 9.431 ms
+  sim_viewer_render: 3.419 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.062 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.884 ms
+  image_shared_memory_write: 0.205 ms
+
+
+--- 帧 #117 ---
+总延迟: 39.985 ms, 帧率: 25.01 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.159 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.086 ms
+  teleop_build_right_pose: 0.044 ms
+  teleop_hand_retargeting: 3.819 ms
+  sim_physics_simulation: 3.139 ms
+  panorama_camera_setup: 0.037 ms
+  panorama_horizon_conversion: 12.328 ms
+  panorama_equirectangular_conversion: 9.405 ms
+  sim_viewer_render: 3.418 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.071 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 7.221 ms
+  image_shared_memory_write: 0.196 ms
+
+
+--- 帧 #118 ---
+总延迟: 36.658 ms, 帧率: 27.28 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.155 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.097 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.677 ms
+  sim_physics_simulation: 3.081 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.276 ms
+  panorama_equirectangular_conversion: 9.374 ms
+  sim_viewer_render: 4.276 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.333 ms
+  image_shared_memory_write: 0.198 ms
+
+
+--- 帧 #119 ---
+总延迟: 36.480 ms, 帧率: 27.41 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.633 ms
+  sim_physics_simulation: 4.255 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.470 ms
+  panorama_equirectangular_conversion: 9.517 ms
+  sim_viewer_render: 3.464 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.069 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.523 ms
+  image_shared_memory_write: 0.189 ms
+
+
+--- 帧 #120 ---
+总延迟: 35.300 ms, 帧率: 28.33 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.159 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.761 ms
+  sim_physics_simulation: 3.413 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.315 ms
+  panorama_equirectangular_conversion: 9.021 ms
+  sim_viewer_render: 3.424 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.064 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.708 ms
+  image_shared_memory_write: 0.212 ms
+
+
+--- 帧 #121 ---
+总延迟: 35.723 ms, 帧率: 27.99 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.148 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.090 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.560 ms
+  sim_physics_simulation: 3.041 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.549 ms
+  panorama_equirectangular_conversion: 9.233 ms
+  sim_viewer_render: 3.441 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 6.287 ms
+  image_shared_memory_write: 0.191 ms
+
+
+--- 帧 #122 ---
+总延迟: 36.079 ms, 帧率: 27.72 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.086 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.754 ms
+  sim_physics_simulation: 3.017 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.577 ms
+  panorama_equirectangular_conversion: 9.560 ms
+  sim_viewer_render: 3.479 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.056 ms
+  image_shared_memory_write: 0.206 ms
+
+
+--- 帧 #123 ---
+总延迟: 36.505 ms, 帧率: 27.39 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.152 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.086 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.839 ms
+  sim_physics_simulation: 3.474 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.491 ms
+  panorama_equirectangular_conversion: 9.297 ms
+  sim_viewer_render: 3.487 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 6.043 ms
+  image_shared_memory_write: 0.444 ms
+
+
+--- 帧 #124 ---
+总延迟: 43.909 ms, 帧率: 22.77 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.281 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.127 ms
+  teleop_build_right_pose: 0.071 ms
+  teleop_hand_retargeting: 9.827 ms
+  sim_physics_simulation: 3.632 ms
+  panorama_camera_setup: 0.062 ms
+  panorama_horizon_conversion: 9.522 ms
+  panorama_equirectangular_conversion: 9.415 ms
+  sim_viewer_render: 3.297 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.112 ms
+  sim_set_actor_dof_state: 0.025 ms
+  panorama_camera_capture: 6.938 ms
+  image_shared_memory_write: 0.551 ms
+
+
+--- 帧 #125 ---
+总延迟: 42.674 ms, 帧率: 23.43 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.294 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.131 ms
+  teleop_build_right_pose: 0.072 ms
+  teleop_hand_retargeting: 8.190 ms
+  sim_physics_simulation: 3.057 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.566 ms
+  panorama_equirectangular_conversion: 10.372 ms
+  sim_viewer_render: 4.523 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.070 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.761 ms
+  image_shared_memory_write: 0.538 ms
+
+
+--- 帧 #126 ---
+总延迟: 38.523 ms, 帧率: 25.96 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.288 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.132 ms
+  teleop_build_right_pose: 0.074 ms
+  teleop_hand_retargeting: 5.776 ms
+  sim_physics_simulation: 3.094 ms
+  panorama_camera_setup: 0.038 ms
+  panorama_horizon_conversion: 9.769 ms
+  panorama_equirectangular_conversion: 9.740 ms
+  sim_viewer_render: 3.725 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.072 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.576 ms
+  image_shared_memory_write: 0.182 ms
+
+
+--- 帧 #127 ---
+总延迟: 36.864 ms, 帧率: 27.13 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.155 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.804 ms
+  sim_physics_simulation: 3.655 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.489 ms
+  panorama_equirectangular_conversion: 9.404 ms
+  sim_viewer_render: 4.676 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.183 ms
+  image_shared_memory_write: 0.222 ms
+
+
+--- 帧 #128 ---
+总延迟: 35.806 ms, 帧率: 27.93 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.173 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.738 ms
+  sim_physics_simulation: 3.545 ms
+  panorama_camera_setup: 0.038 ms
+  panorama_horizon_conversion: 9.616 ms
+  panorama_equirectangular_conversion: 9.457 ms
+  sim_viewer_render: 3.342 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.434 ms
+  image_shared_memory_write: 0.219 ms
+
+
+--- 帧 #129 ---
+总延迟: 41.224 ms, 帧率: 24.26 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.170 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.095 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 6.863 ms
+  sim_physics_simulation: 4.241 ms
+  panorama_camera_setup: 0.037 ms
+  panorama_horizon_conversion: 10.315 ms
+  panorama_equirectangular_conversion: 9.593 ms
+  sim_viewer_render: 3.411 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.073 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 6.109 ms
+  image_shared_memory_write: 0.215 ms
+
+
+--- 帧 #130 ---
+总延迟: 35.796 ms, 帧率: 27.94 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.166 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.781 ms
+  sim_physics_simulation: 3.056 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.604 ms
+  panorama_equirectangular_conversion: 9.223 ms
+  sim_viewer_render: 3.708 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.786 ms
+  image_shared_memory_write: 0.202 ms
+
+
+--- 帧 #131 ---
+总延迟: 36.548 ms, 帧率: 27.36 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.158 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.083 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.699 ms
+  sim_physics_simulation: 3.217 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.722 ms
+  panorama_equirectangular_conversion: 9.487 ms
+  sim_viewer_render: 4.265 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.517 ms
+  image_shared_memory_write: 0.211 ms
+
+
+--- 帧 #132 ---
+总延迟: 36.426 ms, 帧率: 27.45 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.175 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.085 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.723 ms
+  sim_physics_simulation: 3.695 ms
+  panorama_camera_setup: 0.041 ms
+  panorama_horizon_conversion: 9.674 ms
+  panorama_equirectangular_conversion: 9.261 ms
+  sim_viewer_render: 3.310 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.069 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 5.782 ms
+  image_shared_memory_write: 0.510 ms
+
+
+--- 帧 #133 ---
+总延迟: 41.435 ms, 帧率: 24.13 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.294 ms
+  teleop_extract_head_rmat: 0.001 ms
+  teleop_build_left_pose: 0.138 ms
+  teleop_build_right_pose: 0.077 ms
+  teleop_hand_retargeting: 9.022 ms
+  sim_physics_simulation: 3.110 ms
+  panorama_camera_setup: 0.039 ms
+  panorama_horizon_conversion: 10.032 ms
+  panorama_equirectangular_conversion: 9.279 ms
+  sim_viewer_render: 3.313 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.075 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.757 ms
+  image_shared_memory_write: 0.219 ms
+
+
+--- 帧 #134 ---
+总延迟: 35.953 ms, 帧率: 27.81 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.170 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.088 ms
+  teleop_build_right_pose: 0.041 ms
+  teleop_hand_retargeting: 3.797 ms
+  sim_physics_simulation: 3.082 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.674 ms
+  panorama_equirectangular_conversion: 8.969 ms
+  sim_viewer_render: 3.957 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.016 ms
+  panorama_camera_capture: 5.798 ms
+  image_shared_memory_write: 0.216 ms
+
+
+--- 帧 #135 ---
+总延迟: 34.786 ms, 帧率: 28.75 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.154 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.086 ms
+  teleop_build_right_pose: 0.041 ms
+  teleop_hand_retargeting: 3.792 ms
+  sim_physics_simulation: 3.429 ms
+  panorama_camera_setup: 0.037 ms
+  panorama_horizon_conversion: 9.702 ms
+  panorama_equirectangular_conversion: 9.244 ms
+  sim_viewer_render: 3.306 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.076 ms
+  sim_set_actor_dof_state: 0.015 ms
+  panorama_camera_capture: 4.650 ms
+  image_shared_memory_write: 0.209 ms
+
+
+--- 帧 #136 ---
+总延迟: 34.721 ms, 帧率: 28.80 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.157 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.041 ms
+  teleop_hand_retargeting: 3.825 ms
+  sim_physics_simulation: 3.075 ms
+  panorama_camera_setup: 0.036 ms
+  panorama_horizon_conversion: 9.807 ms
+  panorama_equirectangular_conversion: 9.410 ms
+  sim_viewer_render: 3.297 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.068 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 4.675 ms
+  image_shared_memory_write: 0.197 ms
+
+
+--- 帧 #137 ---
+总延迟: 36.380 ms, 帧率: 27.49 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.158 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 4.200 ms
+  sim_physics_simulation: 3.044 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.514 ms
+  panorama_equirectangular_conversion: 9.696 ms
+  sim_viewer_render: 3.339 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.070 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.942 ms
+  image_shared_memory_write: 0.206 ms
+
+
+--- 帧 #138 ---
+总延迟: 34.902 ms, 帧率: 28.65 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.170 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.549 ms
+  sim_physics_simulation: 3.047 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.270 ms
+  panorama_equirectangular_conversion: 8.943 ms
+  sim_viewer_render: 3.382 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.045 ms
+  image_shared_memory_write: 0.234 ms
+
+
+--- 帧 #139 ---
+总延迟: 34.713 ms, 帧率: 28.81 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.162 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.080 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.598 ms
+  sim_physics_simulation: 3.038 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.450 ms
+  panorama_equirectangular_conversion: 8.989 ms
+  sim_viewer_render: 3.240 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.069 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.768 ms
+  image_shared_memory_write: 0.192 ms
+
+
+--- 帧 #140 ---
+总延迟: 34.769 ms, 帧率: 28.76 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.149 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.083 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.629 ms
+  sim_physics_simulation: 3.003 ms
+  panorama_camera_setup: 0.037 ms
+  panorama_horizon_conversion: 9.228 ms
+  panorama_equirectangular_conversion: 9.022 ms
+  sim_viewer_render: 3.295 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.071 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 5.976 ms
+  image_shared_memory_write: 0.191 ms
+
+
+--- 帧 #141 ---
+总延迟: 34.529 ms, 帧率: 28.96 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.165 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.037 ms
+  teleop_hand_retargeting: 3.609 ms
+  sim_physics_simulation: 3.015 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.128 ms
+  panorama_equirectangular_conversion: 9.008 ms
+  sim_viewer_render: 3.352 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.090 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.764 ms
+  image_shared_memory_write: 0.199 ms
+
+
+--- 帧 #142 ---
+总延迟: 34.312 ms, 帧率: 29.14 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.176 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.109 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.574 ms
+  sim_physics_simulation: 3.020 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.198 ms
+  panorama_equirectangular_conversion: 9.071 ms
+  sim_viewer_render: 3.419 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.060 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.380 ms
+  image_shared_memory_write: 0.192 ms
+
+
+--- 帧 #143 ---
+总延迟: 35.264 ms, 帧率: 28.36 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.157 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.037 ms
+  teleop_hand_retargeting: 3.510 ms
+  sim_physics_simulation: 2.997 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.358 ms
+  panorama_equirectangular_conversion: 8.931 ms
+  sim_viewer_render: 3.448 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 6.374 ms
+  image_shared_memory_write: 0.226 ms
+
+
+--- 帧 #144 ---
+总延迟: 34.616 ms, 帧率: 28.89 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.173 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.665 ms
+  sim_physics_simulation: 3.053 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.139 ms
+  panorama_equirectangular_conversion: 8.811 ms
+  sim_viewer_render: 3.314 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.084 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.981 ms
+  image_shared_memory_write: 0.196 ms
+
+
+--- 帧 #145 ---
+总延迟: 34.380 ms, 帧率: 29.09 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.144 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.081 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.531 ms
+  sim_physics_simulation: 3.017 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.059 ms
+  panorama_equirectangular_conversion: 8.813 ms
+  sim_viewer_render: 3.329 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.023 ms
+  image_shared_memory_write: 0.204 ms
+
+
+--- 帧 #146 ---
+总延迟: 34.976 ms, 帧率: 28.59 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.169 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.559 ms
+  sim_physics_simulation: 2.999 ms
+  panorama_camera_setup: 0.034 ms
+  panorama_horizon_conversion: 9.306 ms
+  panorama_equirectangular_conversion: 9.052 ms
+  sim_viewer_render: 3.389 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.062 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.044 ms
+  image_shared_memory_write: 0.196 ms
+
+
+--- 帧 #147 ---
+总延迟: 34.375 ms, 帧率: 29.09 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.157 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.689 ms
+  sim_physics_simulation: 3.053 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.209 ms
+  panorama_equirectangular_conversion: 9.049 ms
+  sim_viewer_render: 3.317 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.064 ms
+  sim_set_actor_dof_state: 0.016 ms
+  panorama_camera_capture: 5.436 ms
+  image_shared_memory_write: 0.196 ms
+
+
+--- 帧 #148 ---
+总延迟: 34.720 ms, 帧率: 28.80 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.150 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.705 ms
+  sim_physics_simulation: 3.014 ms
+  panorama_camera_setup: 0.035 ms
+  panorama_horizon_conversion: 9.289 ms
+  panorama_equirectangular_conversion: 8.869 ms
+  sim_viewer_render: 3.447 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.089 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.758 ms
+  image_shared_memory_write: 0.192 ms
+
+
+--- 帧 #149 ---
+总延迟: 34.563 ms, 帧率: 28.93 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.157 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.110 ms
+  teleop_build_right_pose: 0.059 ms
+  teleop_hand_retargeting: 3.560 ms
+  sim_physics_simulation: 2.994 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.378 ms
+  panorama_equirectangular_conversion: 8.773 ms
+  sim_viewer_render: 3.392 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.062 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.803 ms
+  image_shared_memory_write: 0.194 ms
+
+
+--- 帧 #150 ---
+总延迟: 35.158 ms, 帧率: 28.44 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.147 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.083 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.671 ms
+  sim_physics_simulation: 3.026 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.282 ms
+  panorama_equirectangular_conversion: 9.060 ms
+  sim_viewer_render: 3.325 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.060 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 6.199 ms
+  image_shared_memory_write: 0.188 ms
+
+
+--- 帧 #151 ---
+总延迟: 34.778 ms, 帧率: 28.75 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.186 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.082 ms
+  teleop_build_right_pose: 0.045 ms
+  teleop_hand_retargeting: 3.703 ms
+  sim_physics_simulation: 2.984 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.299 ms
+  panorama_equirectangular_conversion: 8.765 ms
+  sim_viewer_render: 3.275 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.095 ms
+  image_shared_memory_write: 0.204 ms
+
+
+--- 帧 #152 ---
+总延迟: 34.855 ms, 帧率: 28.69 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.156 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.083 ms
+  teleop_build_right_pose: 0.040 ms
+  teleop_hand_retargeting: 3.601 ms
+  sim_physics_simulation: 3.014 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.201 ms
+  panorama_equirectangular_conversion: 9.049 ms
+  sim_viewer_render: 3.436 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.061 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.907 ms
+  image_shared_memory_write: 0.220 ms
+
+
+--- 帧 #153 ---
+总延迟: 34.507 ms, 帧率: 28.98 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.147 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.081 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.505 ms
+  sim_physics_simulation: 3.008 ms
+  panorama_camera_setup: 0.031 ms
+  panorama_horizon_conversion: 9.371 ms
+  panorama_equirectangular_conversion: 8.794 ms
+  sim_viewer_render: 3.328 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.064 ms
+  sim_set_actor_dof_state: 0.012 ms
+  panorama_camera_capture: 5.887 ms
+  image_shared_memory_write: 0.202 ms
+
+
+--- 帧 #154 ---
+总延迟: 34.537 ms, 帧率: 28.95 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.149 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.037 ms
+  teleop_hand_retargeting: 3.588 ms
+  sim_physics_simulation: 2.973 ms
+  panorama_camera_setup: 0.031 ms
+  panorama_horizon_conversion: 9.189 ms
+  panorama_equirectangular_conversion: 8.817 ms
+  sim_viewer_render: 3.508 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.063 ms
+  sim_set_actor_dof_state: 0.036 ms
+  panorama_camera_capture: 5.833 ms
+  image_shared_memory_write: 0.195 ms
+
+
+--- 帧 #155 ---
+总延迟: 34.470 ms, 帧率: 29.01 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.170 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.084 ms
+  teleop_build_right_pose: 0.043 ms
+  teleop_hand_retargeting: 3.597 ms
+  sim_physics_simulation: 3.035 ms
+  panorama_camera_setup: 0.033 ms
+  panorama_horizon_conversion: 9.181 ms
+  panorama_equirectangular_conversion: 8.732 ms
+  sim_viewer_render: 3.381 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.065 ms
+  sim_set_actor_dof_state: 0.014 ms
+  panorama_camera_capture: 5.865 ms
+  image_shared_memory_write: 0.240 ms
+
+
+--- 帧 #156 ---
+总延迟: 35.585 ms, 帧率: 28.10 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.173 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.079 ms
+  teleop_build_right_pose: 0.038 ms
+  teleop_hand_retargeting: 3.668 ms
+  sim_physics_simulation: 3.042 ms
+  panorama_camera_setup: 0.032 ms
+  panorama_horizon_conversion: 9.325 ms
+  panorama_equirectangular_conversion: 9.858 ms
+  sim_viewer_render: 3.329 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.061 ms
+  sim_set_actor_dof_state: 0.011 ms
+  panorama_camera_capture: 5.739 ms
+  image_shared_memory_write: 0.197 ms
+
+
+--- 帧 #157 ---
+总延迟: 34.615 ms, 帧率: 28.89 FPS
+
+计算延迟:
+  teleop_preprocessor: 0.177 ms
+  teleop_extract_head_rmat: 0.000 ms
+  teleop_build_left_pose: 0.081 ms
+  teleop_build_right_pose: 0.039 ms
+  teleop_hand_retargeting: 3.554 ms
+  sim_physics_simulation: 2.986 ms
+  panorama_camera_setup: 0.030 ms
+  panorama_horizon_conversion: 9.140 ms
+  panorama_equirectangular_conversion: 8.860 ms
+  sim_viewer_render: 3.407 ms
+
+传输延迟:
+  sim_set_actor_root_state: 0.067 ms
+  sim_set_actor_dof_state: 0.013 ms
+  panorama_camera_capture: 6.031 ms
+  image_shared_memory_write: 0.200 ms
+
+
+================================================================================
+=== 统计分析 - 总帧数: 157 ===
+================================================================================
+
+=== 计算延迟统计 ===
+panorama_horizon_conversion:
+  平均值: 9.807 ms
+  标准差: 1.801 ms
+  最小值: 8.952 ms
+  最大值: 20.144 ms
+  累计: 1539.722 ms
+
+teleop_build_right_pose:
+  平均值: 0.043 ms
+  标准差: 0.011 ms
+  最小值: 0.035 ms
+  最大值: 0.087 ms
+  累计: 6.803 ms
+
+teleop_build_left_pose:
+  平均值: 0.090 ms
+  标准差: 0.016 ms
+  最小值: 0.075 ms
+  最大值: 0.160 ms
+  累计: 14.156 ms
+
+teleop_hand_retargeting:
+  平均值: 4.007 ms
+  标准差: 1.478 ms
+  最小值: 1.640 ms
+  最大值: 10.462 ms
+  累计: 629.067 ms
+
+panorama_camera_setup:
+  平均值: 0.036 ms
+  标准差: 0.008 ms
+  最小值: 0.030 ms
+  最大值: 0.093 ms
+  累计: 5.697 ms
+
+sim_viewer_render:
+  平均值: 4.613 ms
+  标准差: 10.117 ms
+  最小值: 3.178 ms
+  最大值: 106.715 ms
+  累计: 724.255 ms
+
+sim_physics_simulation:
+  平均值: 3.465 ms
+  标准差: 3.730 ms
+  最小值: 2.969 ms
+  最大值: 49.899 ms
+  累计: 543.981 ms
+
+teleop_extract_head_rmat:
+  平均值: 0.000 ms
+  标准差: 0.000 ms
+  最小值: 0.000 ms
+  最大值: 0.001 ms
+  累计: 0.036 ms
+
+teleop_preprocessor:
+  平均值: 0.171 ms
+  标准差: 0.039 ms
+  最小值: 0.141 ms
+  最大值: 0.311 ms
+  累计: 26.788 ms
+
+panorama_equirectangular_conversion:
+  平均值: 9.422 ms
+  标准差: 2.693 ms
+  最小值: 8.501 ms
+  最大值: 41.117 ms
+  累计: 1479.289 ms
+
+
+=== 传输延迟统计 ===
+panorama_camera_capture:
+  平均值: 6.107 ms
+  标准差: 1.890 ms
+  最小值: 4.650 ms
+  最大值: 28.684 ms
+  累计: 958.814 ms
+
+image_shared_memory_write:
+  平均值: 0.246 ms
+  标准差: 0.122 ms
+  最小值: 0.180 ms
+  最大值: 1.216 ms
+  累计: 38.568 ms
+
+sim_set_actor_root_state:
+  平均值: 0.070 ms
+  标准差: 0.012 ms
+  最小值: 0.060 ms
+  最大值: 0.144 ms
+  累计: 10.975 ms
+
+sim_set_actor_dof_state:
+  平均值: 0.015 ms
+  标准差: 0.004 ms
+  最小值: 0.011 ms
+  最大值: 0.037 ms
+  累计: 2.289 ms
+
+
+=== 总体延迟统计 ===
+总延迟平均值: 38.130 ms
+总延迟标准差: 17.999 ms
+总延迟最小值: 32.653 ms
+总延迟最大值: 244.391 ms
+
+
+=== 帧率统计 ===
+平均帧率: 27.50 FPS
+帧率标准差: 3.25 FPS
+最低帧率: 4.09 FPS
+最高帧率: 30.63 FPS
+
+
+=== 延迟占比分析 ===
+总计算时间: 4969.795 ms (83.02%)
+总传输时间: 1010.647 ms (16.88%)
+总帧时间: 5986.434 ms
+
+各计算模块占比:
+  panorama_horizon_conversion: 25.72%
+  teleop_build_right_pose: 0.11%
+  teleop_build_left_pose: 0.24%
+  teleop_hand_retargeting: 10.51%
+  panorama_camera_setup: 0.10%
+  sim_viewer_render: 12.10%
+  sim_physics_simulation: 9.09%
+  teleop_extract_head_rmat: 0.00%
+  teleop_preprocessor: 0.45%
+  panorama_equirectangular_conversion: 24.71%
+
+各传输模块占比:
+  panorama_camera_capture: 16.02%
+  image_shared_memory_write: 0.64%
+  sim_set_actor_root_state: 0.18%
+  sim_set_actor_dof_state: 0.04%
+
+================================================================================
+=== 分析完成时间: 2025-11-02 16:04:58 ===
