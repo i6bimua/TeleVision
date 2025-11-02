@@ -1,17 +1,29 @@
 import time
 from vuer import Vuer
 from vuer.events import ClientEvent
-from vuer.schemas import ImageBackground, group, Hands, WebRTCStereoVideoPlane, DefaultScene
-from multiprocessing import Array, Process, shared_memory, Queue, Manager, Event, Semaphore
+from vuer.schemas import ImageBackground, group, Hands, WebRTCStereoVideoPlane, DefaultScene, Sphere
+from multiprocessing import Array, Process, shared_memory, Queue, Manager, Event, Semaphore, Value
 import numpy as np
 import asyncio
 from webrtc.zed_server import *
+from PIL import Image
+import io
+import base64
 
 class OpenTeleVision:
-    def __init__(self, img_shape, shm_name, queue, toggle_streaming, stream_mode="image", cert_file="./cert.pem", key_file="./key.pem", ngrok=False):
-        # self.app=Vuer()
-        self.img_shape = (img_shape[0], 2*img_shape[1], 3)
-        self.img_height, self.img_width = img_shape[:2]
+    def __init__(self, img_shape, shm_name, queue, toggle_streaming, stream_mode="image", cert_file="./cert.pem", key_file="./key.pem", ngrok=False, panorama_mode=True, print_freq=False):
+        self.panorama_mode = panorama_mode
+        self.print_freq = print_freq
+        
+        if panorama_mode:
+            # 全景模式：img_shape应该是(高度, 宽度)格式的全景图尺寸
+            # 全景图宽高比是2:1
+            self.img_shape = img_shape
+            self.img_height, self.img_width = img_shape[:2]
+        else:
+            # 旧的立体相机模式
+            self.img_shape = (img_shape[0], 2*img_shape[1], 3)
+            self.img_height, self.img_width = img_shape[:2]
 
         if ngrok:
             self.app = Vuer(host='0.0.0.0', queries=dict(grid=False), queue_len=3)
@@ -23,7 +35,10 @@ class OpenTeleVision:
         if stream_mode == "image":
             existing_shm = shared_memory.SharedMemory(name=shm_name)
             self.img_array = np.ndarray((self.img_shape[0], self.img_shape[1], 3), dtype=np.uint8, buffer=existing_shm.buf)
-            self.app.spawn(start=False)(self.main_image)
+            if panorama_mode:
+                self.app.spawn(start=False)(self.main_panorama)
+            else:
+                self.app.spawn(start=False)(self.main_image)
         elif stream_mode == "webrtc":
             self.app.spawn(start=False)(self.main_webrtc)
         else:
@@ -78,32 +93,14 @@ class OpenTeleVision:
         self.app.run()
 
     async def on_cam_move(self, event, session, fps=60):
-        # only intercept the ego camera.
-        # if event.key != "ego":
-        #     return
         try:
-            # with self.head_matrix_shared.get_lock():  # Use the lock to ensure thread-safe updates
-            #     self.head_matrix_shared[:] = event.value["camera"]["matrix"]
-            # with self.aspect_shared.get_lock():
-            #     self.aspect_shared.value = event.value['camera']['aspect']
             self.head_matrix_shared[:] = event.value["camera"]["matrix"]
             self.aspect_shared.value = event.value['camera']['aspect']
         except:
             pass
-        # self.head_matrix = np.array(event.value["camera"]["matrix"]).reshape(4, 4, order="F")
-        # print(np.array(event.value["camera"]["matrix"]).reshape(4, 4, order="F"))
-        # print("camera moved", event.value["matrix"].shape, event.value["matrix"])
 
     async def on_hand_move(self, event, session, fps=60):
         try:
-            # with self.left_hand_shared.get_lock():  # Use the lock to ensure thread-safe updates
-            #     self.left_hand_shared[:] = event.value["leftHand"]
-            # with self.right_hand_shared.get_lock():
-            #     self.right_hand_shared[:] = event.value["rightHand"]
-            # with self.left_landmarks_shared.get_lock():
-            #     self.left_landmarks_shared[:] = np.array(event.value["leftLandmarks"]).flatten()
-            # with self.right_landmarks_shared.get_lock():
-            #     self.right_landmarks_shared[:] = np.array(event.value["rightLandmarks"]).flatten()
             self.left_hand_shared[:] = event.value["leftHand"]
             self.right_hand_shared[:] = event.value["rightHand"]
             self.left_landmarks_shared[:] = np.array(event.value["leftLandmarks"]).flatten()
@@ -125,129 +122,161 @@ class OpenTeleVision:
         while True:
             await asyncio.sleep(1)
     
+    async def main_panorama(self, session, fps=60):
+        """
+        使用SkyBall显示全景图 - 严格按照官方示例
+        """
+        from vuer.schemas import Sphere, DefaultScene
+        from asyncio import sleep
+        
+        # 读取第一帧图像并创建Sphere
+        display_image = self.img_array.copy()
+        
+        # 将numpy数组转换为JPEG格式的base64字符串
+        pil_img = Image.fromarray(display_image, 'RGB')
+        
+        # 使用内存缓冲区
+        buffer = io.BytesIO()
+        pil_img.save(buffer, format='JPEG', quality=85)
+        img_bytes = buffer.getvalue()
+        img_base64 = base64.b64encode(img_bytes).decode('utf-8')
+        
+        # 创建data URL
+        img_data_url = f"data:image/jpeg;base64,{img_base64}"
+        
+        # 创建Sphere - 应用坐标系转换旋转矩阵
+        # 从Z-UP到Y-UP的转换：基于grd_yup2grd_zup的逆矩阵
+        # 绕Y轴旋转+90°（XYZ顺序内旋）进行坐标系转换
+        sphere = Sphere(
+            args=[1, 32, 32],
+            materialType="standard",
+            material={"map": img_data_url, "side": 1},
+            position=[0, 0, 0],
+            rotation=[0, 0.5 * np.pi, 0],  # [0°, 90°, 0°] = 绕Y轴旋转90度
+        )
+        
+        # 使用官方示例的方式设置DefaultScene（Y-UP，不设置Z-up）
+        session.set @ DefaultScene(sphere)
+        
+        session.upsert @ Hands(fps=fps, stream=True, key="hands", showLeft=False, showRight=False)
+        
+        # 恢复更新功能 - 严格按照官方示例的配置
+        end_time = time.time()
+        frame_count = 0
+        
+        while True:
+            start = time.time()
+            display_image = self.img_array.copy()
+            
+            # 将numpy数组转换为JPEG格式的base64字符串
+            pil_img = Image.fromarray(display_image, 'RGB')
+            
+            # 使用内存缓冲区
+            buffer = io.BytesIO()
+            pil_img.save(buffer, format='JPEG', quality=85)
+            img_bytes = buffer.getvalue()
+            img_base64 = base64.b64encode(img_bytes).decode('utf-8')
+            
+            # 创建data URL
+            img_data_url = f"data:image/jpeg;base64,{img_base64}"
+            
+            # 更新Sphere - 严格按照官方示例的配置，确保rotation等参数完全一致
+            session.upsert @ Sphere(
+                args=[1, 32, 32],
+                materialType="standard",
+                material={"map": img_data_url, "side": 1},
+                position=[0, 0, 0],
+                rotation=[0, 0.5 * np.pi, 0],  # 与初始化时完全一致：[0°, 90°, 0°]
+                key="skyball"
+            )
+            
+            # 不在循环中更新DefaultScene，避免覆盖up参数
+            
+            end_time = time.time()
+            frame_count += 1
+            
+            if self.print_freq and frame_count % 60 == 0:
+                print(f'Panorama FPS: {60 / (end_time - start) if frame_count > 0 else 0:.2f}')
+            
+            await asyncio.sleep(0.016)  # ~60fps
+    
     async def main_image(self, session, fps=60):
+        """旧的立体相机显示模式"""
         session.upsert @ Hands(fps=fps, stream=True, key="hands", showLeft=False, showRight=False)
         end_time = time.time()
         while True:
             start = time.time()
-            # print(end_time - start)
-            # aspect = self.aspect_shared.value
             display_image = self.img_array
-
-            # session.upsert(
-            # ImageBackground(
-            #     # Can scale the images down.
-            #     display_image[:self.img_height],
-            #     # 'jpg' encoding is significantly faster than 'png'.
-            #     format="jpeg",
-            #     quality=80,
-            #     key="left-image",
-            #     interpolate=True,
-            #     # fixed=True,
-            #     aspect=1.778,
-            #     distanceToCamera=2,
-            #     position=[0, -0.5, -2],
-            #     rotation=[0, 0, 0],
-            # ),
-            # to="bgChildren",
-            # )
 
             session.upsert(
             [ImageBackground(
-                # Can scale the images down.
                 display_image[::2, :self.img_width],
-                # display_image[:self.img_height:2, ::2],
-                # 'jpg' encoding is significantly faster than 'png'.
                 format="jpeg",
                 quality=80,
                 key="left-image",
                 interpolate=True,
-                # fixed=True,
                 aspect=1.66667,
-                # distanceToCamera=0.5,
                 height = 8,
                 position=[0, -1, 3],
-                # rotation=[0, 0, 0],
                 layers=1, 
                 alphaSrc="./vinette.jpg"
             ),
             ImageBackground(
-                # Can scale the images down.
                 display_image[::2, self.img_width:],
-                # display_image[self.img_height::2, ::2],
-                # 'jpg' encoding is significantly faster than 'png'.
                 format="jpeg",
                 quality=80,
                 key="right-image",
                 interpolate=True,
-                # fixed=True,
                 aspect=1.66667,
-                # distanceToCamera=0.5,
                 height = 8,
                 position=[0, -1, 3],
-                # rotation=[0, 0, 0],
                 layers=2, 
                 alphaSrc="./vinette.jpg"
             )],
             to="bgChildren",
             )
-            # rest_time = 1/fps - time.time() + start
             end_time = time.time()
             await asyncio.sleep(0.03)
 
     @property
     def left_hand(self):
-        # with self.left_hand_shared.get_lock():
-        #     return np.array(self.left_hand_shared[:]).reshape(4, 4, order="F")
         return np.array(self.left_hand_shared[:]).reshape(4, 4, order="F")
         
     
     @property
     def right_hand(self):
-        # with self.right_hand_shared.get_lock():
-        #     return np.array(self.right_hand_shared[:]).reshape(4, 4, order="F")
         return np.array(self.right_hand_shared[:]).reshape(4, 4, order="F")
         
     
     @property
     def left_landmarks(self):
-        # with self.left_landmarks_shared.get_lock():
-        #     return np.array(self.left_landmarks_shared[:]).reshape(25, 3)
         return np.array(self.left_landmarks_shared[:]).reshape(25, 3)
     
     @property
     def right_landmarks(self):
-        # with self.right_landmarks_shared.get_lock():
-            # return np.array(self.right_landmarks_shared[:]).reshape(25, 3)
         return np.array(self.right_landmarks_shared[:]).reshape(25, 3)
 
     @property
     def head_matrix(self):
-        # with self.head_matrix_shared.get_lock():
-        #     return np.array(self.head_matrix_shared[:]).reshape(4, 4, order="F")
         return np.array(self.head_matrix_shared[:]).reshape(4, 4, order="F")
 
     @property
     def aspect(self):
-        # with self.aspect_shared.get_lock():
-            # return float(self.aspect_shared.value)
         return float(self.aspect_shared.value)
 
     
 if __name__ == "__main__":
     resolution = (720, 1280)
-    crop_size_w = 340  # (resolution[1] - resolution[0]) // 2
+    crop_size_w = 340
     crop_size_h = 270
-    resolution_cropped = (resolution[0] - crop_size_h, resolution[1] - 2 * crop_size_w)  # 450 * 600
-    img_shape = (2 * resolution_cropped[0], resolution_cropped[1], 3)  # 900 * 600
-    img_height, img_width = resolution_cropped[:2]  # 450 * 600
+    resolution_cropped = (resolution[0] - crop_size_h, resolution[1] - 2 * crop_size_w)
+    img_shape = (2 * resolution_cropped[0], resolution_cropped[1], 3)
+    img_height, img_width = resolution_cropped[:2]
     shm = shared_memory.SharedMemory(create=True, size=np.prod(img_shape) * np.uint8().itemsize)
     shm_name = shm.name
     img_array = np.ndarray((img_shape[0], img_shape[1], 3), dtype=np.uint8, buffer=shm.buf)
 
     tv = OpenTeleVision(resolution_cropped, cert_file="../cert.pem", key_file="../key.pem")
     while True:
-        # print(tv.left_landmarks)
-        # print(tv.left_hand)
-        # tv.modify_shared_image(random=True)
         time.sleep(1)
+
