@@ -33,7 +33,7 @@ def parse_latency_log(log_file_path):
             # 保存上一帧
             if current_frame is not None:
                 frames.append(current_frame)
-            
+        
             # 开始新帧
             match = re.search(r'帧 #(\d+)', line)
             if match:
@@ -68,7 +68,7 @@ def parse_latency_log(log_file_path):
         # 解析帧率
         if in_frame and '帧率:' in line and 'FPS' in line:
             match = re.search(r'帧率:\s*([\d.]+)\s*FPS', line)
-            if match:
+                    if match:
                 current_frame['fps'] = float(match.group(1))
         
         # 解析计算延迟
@@ -98,7 +98,7 @@ def parse_latency_log(log_file_path):
         # 解析闭环延迟（可能在帧内容中，也可能在帧末尾）
         if in_frame and '闭环延迟（端到端）:' in line:
             match = re.search(r'闭环延迟（端到端）:\s*([\d.]+)\s*ms', line)
-            if match:
+                        if match:
                 current_frame['full_loop_delay_ms'] = float(match.group(1))
             # 检查是否标记为无效
             if '无效' in line or 'invalid' in line.lower() or '⚠️' in line:

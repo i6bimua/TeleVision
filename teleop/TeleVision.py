@@ -581,6 +581,7 @@ class OpenTeleVision:
                 )
                 
                 # 记录WebSocket发送完成时间（闭环延迟的终点）
+                # ⚠️ 注意：session.upsert是异步的，这只是VR端将数据放入发送队列的时间，不包含实际网络传输时间
                 t_websocket_end = time.time()
                 # 将WebSocket发送完成时间写入共享内存
                 if hasattr(self, 'meta_buf') and self.meta_buf is not None:

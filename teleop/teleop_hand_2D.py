@@ -110,7 +110,14 @@ class LatencyMonitor:
             # 显示闭环延迟（如果存在）
             if 'full_loop_delay_ms' in self.current_frame:
                 full_loop_delay = self.current_frame['full_loop_delay_ms']
-                f.write(f"闭环延迟（端到端）: {full_loop_delay:.3f} ms (从VR手部运动到WebSocket发送完成，包括网络传输)\n")
+                if self.network_mode:
+                    f.write(f"闭环延迟（端到端）: {full_loop_delay:.3f} ms (从VR手部运动到WebSocket发送完成，⚠️ 注意：不包含主机->VR的网络传输时间)\n")
+                    f.write(f"  ⚠️  重要：session.upsert是异步的，只记录主机端将数据放入队列的时间，实际的网络传输（主机->VR）没有被测量\n")
+                    if 'complete_full_loop_delay_ms' in self.current_frame:
+                        complete_delay = self.current_frame.get('complete_full_loop_delay_ms', full_loop_delay)
+                        f.write(f"  完整的闭环延迟（包含所有5个阶段）: {complete_delay:.3f} ms\n")
+                else:
+                    f.write(f"闭环延迟（端到端）: {full_loop_delay:.3f} ms (从VR手部运动到WebSocket发送完成，本地模式)\n")
             
             # 显示延迟验证信息
             if 'total_sub_delays_ms' in self.current_frame:
@@ -163,14 +170,70 @@ class LatencyMonitor:
                         hand_time = self.current_frame['hand_move_receive_time']
                         f.write(f"  时间戳: HAND_MOVE接收={hand_time:.6f} (已过时 {hand_move_age:.3f} ms)\n")
                 else:
-                    f.write(f"\n闭环延迟（端到端）: {full_loop_delay:.3f} ms\n")
-                    f.write(f"  起点: HAND_MOVE事件接收时间（VR设备捕获手部运动）\n")
-                    f.write(f"  终点: WebSocket发送完成时间（图像发送到VR，包括网络传输）\n")
-                    f.write(f"  注意: 真正的显示延迟还包括VR端渲染时间（通常+10-20ms）\n")
-                    if 'hand_move_receive_time' in self.current_frame and 'websocket_send_complete_time' in self.current_frame:
-                        hand_time = self.current_frame['hand_move_receive_time']
-                        ws_time = self.current_frame['websocket_send_complete_time']
-                        f.write(f"  时间戳: HAND_MOVE接收={hand_time:.6f}, WebSocket完成={ws_time:.6f}\n")
+                    if self.network_mode:
+                        f.write(f"\n⚠️  闭环延迟（端到端）: {full_loop_delay:.3f} ms [不包含网络传输时间]\n")
+                        f.write(f"  起点: HAND_MOVE事件接收时间（VR设备捕获手部运动）\n")
+                        f.write(f"  终点: WebSocket发送完成时间（主机端将数据放入发送队列，⚠️ 不包含实际网络传输）\n")
+                        f.write(f"  ⚠️  关键问题：session.upsert是异步的，只记录主机端将数据放入队列的时间，不包含主机->VR的网络传输\n")
+                        if 'complete_full_loop_delay_ms' in self.current_frame:
+                            measured_delay = self.current_frame.get('measured_delay_ms', full_loop_delay)
+                            estimated_vr_to_host = self.current_frame.get('estimated_vr_to_host_transmission_ms', 0)
+                            host_processing = self.current_frame.get('host_processing_time_ms', 0)
+                            vr_processing = self.current_frame.get('vr_processing_time_ms', 0)
+                            estimated_host_to_vr_transmission = self.current_frame.get('estimated_host_to_vr_transmission_ms', 0)
+                            estimated_vr_rendering = self.current_frame.get('estimated_vr_rendering_ms', 0)
+                            complete_delay = self.current_frame.get('complete_full_loop_delay_ms', full_loop_delay)
+                            
+                            queue_blocking = self.current_frame.get('queue_blocking_delay_ms', 0)
+                            base_transmission = self.current_frame.get('estimated_host_to_vr_transmission_base_ms', estimated_host_to_vr_transmission)
+                            
+                            f.write(f"  完整闭环延迟分解（VR设备捕获 → VR设备显示）:\n")
+                            f.write(f"    1. VR→主机传输: {estimated_vr_to_host:.3f} ms\n")
+                            f.write(f"    2. 主机处理: {host_processing:.3f} ms\n")
+                            f.write(f"    3. VR处理（到WebSocket发送）: {vr_processing:.3f} ms\n")
+                            f.write(f"    4. 主机→VR传输:\n")
+                            f.write(f"       - 基础传输延迟: {base_transmission:.3f} ms（估算）\n")
+                            if queue_blocking > 0:
+                                f.write(f"       - 队列阻塞延迟: {queue_blocking:.3f} ms\n")
+                            else:
+                                f.write(f"       - 队列阻塞延迟: 0.000 ms（无阻塞）\n")
+                            f.write(f"       - 总传输延迟: {estimated_host_to_vr_transmission:.3f} ms\n")
+                            f.write(f"    5. VR渲染: {estimated_vr_rendering:.3f} ms（估算）\n")
+                            f.write(f"    测量的延迟（阶段1-3）: {measured_delay:.3f} ms\n")
+                            f.write(f"    完整的闭环延迟（阶段1-5）: {complete_delay:.3f} ms\n")
+                            f.write(f"  说明: 使用ngrok中转（东京），典型主机->VR传输延迟: 50-100ms，VR渲染: 10-20ms\n")
+                        else:
+                            f.write(f"  ⚠️  警告: 无法估算网络延迟，实际延迟可能远大于显示值\n")
+                        if 'hand_move_receive_time' in self.current_frame and 'websocket_send_complete_time' in self.current_frame:
+                            hand_time = self.current_frame['hand_move_receive_time']
+                            ws_time = self.current_frame['websocket_send_complete_time']
+                            f.write(f"  时间戳: HAND_MOVE接收={hand_time:.6f}, WebSocket完成={ws_time:.6f}\n")
+                    else:
+                        f.write(f"\n闭环延迟（端到端）: {full_loop_delay:.3f} ms\n")
+                        f.write(f"  起点: HAND_MOVE事件接收时间（VR设备捕获手部运动）\n")
+                        f.write(f"  终点: WebSocket发送完成时间（图像发送到VR，本地模式）\n")
+                        # 在本地模式下，同样输出分解（主机→VR传输与VR渲染近似0）
+                        if 'complete_full_loop_delay_ms' in self.current_frame:
+                            measured_delay = self.current_frame.get('measured_delay_ms', full_loop_delay)
+                            estimated_vr_to_host = self.current_frame.get('estimated_vr_to_host_transmission_ms', 0)
+                            host_processing = self.current_frame.get('host_processing_time_ms', 0)
+                            vr_processing = self.current_frame.get('vr_processing_time_ms', 0)
+                            estimated_host_to_vr_transmission = self.current_frame.get('estimated_host_to_vr_transmission_ms', 0)
+                            estimated_vr_rendering = self.current_frame.get('estimated_vr_rendering_ms', 0)
+                            complete_delay = self.current_frame.get('complete_full_loop_delay_ms', full_loop_delay)
+
+                            f.write(f"  完整闭环延迟分解（VR设备捕获 → VR设备显示，本地）:\n")
+                            f.write(f"    1. VR→主机传输: {estimated_vr_to_host:.3f} ms\n")
+                            f.write(f"    2. 主机处理: {host_processing:.3f} ms\n")
+                            f.write(f"    3. VR处理（到WebSocket发送）: {vr_processing:.3f} ms\n")
+                            f.write(f"    4. 主机→VR传输: {estimated_host_to_vr_transmission:.3f} ms（本地≈0）\n")
+                            f.write(f"    5. VR渲染: {estimated_vr_rendering:.3f} ms（本地≈0）\n")
+                            f.write(f"    测量的延迟（阶段1-3）: {measured_delay:.3f} ms\n")
+                            f.write(f"    完整的闭环延迟（阶段1-5）: {complete_delay:.3f} ms\n")
+                        if 'hand_move_receive_time' in self.current_frame and 'websocket_send_complete_time' in self.current_frame:
+                            hand_time = self.current_frame['hand_move_receive_time']
+                            ws_time = self.current_frame['websocket_send_complete_time']
+                            f.write(f"  时间戳: HAND_MOVE接收={hand_time:.6f}, WebSocket完成={ws_time:.6f}\n")
             
             f.write("\n")
     
@@ -268,8 +331,54 @@ class LatencyMonitor:
                 f.write(f"闭环延迟标准差: {np.std(full_loop_delays):.3f} ms\n")
                 f.write(f"闭环延迟最小值: {np.min(full_loop_delays):.3f} ms\n")
                 f.write(f"闭环延迟最大值: {np.max(full_loop_delays):.3f} ms\n")
-                f.write(f"注意: 真正的显示延迟还包括VR端渲染时间（通常+10-20ms）\n")
-                f.write(f"说明: 闭环延迟 = VR设备捕获手部运动 -> 主机处理 -> 图像发送到VR（包括网络传输）\n")
+                if self.network_mode:
+                    f.write(f"\n⚠️  重要：网络模式下的闭环延迟统计\n")
+                    f.write(f"  显示的值不包含主机->VR的网络传输时间（单程）\n")
+                    f.write(f"  原因：session.upsert是异步的，只记录主机端将数据放入队列的时间\n")
+                    f.write(f"  注意：hand_move_receive_time已包含VR->主机的网络传输\n")
+                    # 计算完整的闭环延迟统计（包含所有5个阶段）
+                    complete_delays = [f.get('complete_full_loop_delay_ms', 0) for f in self.frame_timings if 'complete_full_loop_delay_ms' in f and f.get('complete_full_loop_delay_ms', 0) > 0]
+                    measured_delays = [f.get('measured_delay_ms', 0) for f in self.frame_timings if 'measured_delay_ms' in f]
+                    estimated_vr_to_hosts = [f.get('estimated_vr_to_host_transmission_ms', 0) for f in self.frame_timings if 'estimated_vr_to_host_transmission_ms' in f]
+                    estimated_host_to_vr_transmissions = [f.get('estimated_host_to_vr_transmission_ms', 0) for f in self.frame_timings if 'estimated_host_to_vr_transmission_ms' in f]
+                    estimated_vr_renderings = [f.get('estimated_vr_rendering_ms', 0) for f in self.frame_timings if 'estimated_vr_rendering_ms' in f]
+                    
+                    if complete_delays:
+                        f.write(f"  完整的闭环延迟统计（阶段1-5）:\n")
+                        f.write(f"    平均值: {np.mean(complete_delays):.3f} ms\n")
+                        f.write(f"    最小值: {np.min(complete_delays):.3f} ms\n")
+                        f.write(f"    最大值: {np.max(complete_delays):.3f} ms\n")
+                        f.write(f"    标准差: {np.std(complete_delays):.3f} ms\n")
+                    
+                    if measured_delays:
+                        f.write(f"  测量的延迟统计（阶段1-3，不含主机→VR传输和VR渲染）:\n")
+                        f.write(f"    平均值: {np.mean(measured_delays):.3f} ms\n")
+                    
+                    if estimated_vr_to_hosts:
+                        avg_vr_to_host = np.mean([d for d in estimated_vr_to_hosts if d > 0])
+                        f.write(f"  平均VR→主机传输延迟（阶段1）: {avg_vr_to_host:.3f} ms\n")
+                    
+                    if estimated_host_to_vr_transmissions:
+                        avg_host_to_vr = np.mean([d for d in estimated_host_to_vr_transmissions if d > 0])
+                        # 计算平均队列阻塞延迟
+                        queue_blocking_delays = [f.get('queue_blocking_delay_ms', 0) for f in self.frame_timings if 'queue_blocking_delay_ms' in f]
+                        avg_queue_blocking = np.mean([d for d in queue_blocking_delays if d > 0]) if queue_blocking_delays else 0
+                        base_transmissions = [f.get('estimated_host_to_vr_transmission_base_ms', 70.0) for f in self.frame_timings if 'estimated_host_to_vr_transmission_base_ms' in f]
+                        avg_base_transmission = np.mean([d for d in base_transmissions if d > 0]) if base_transmissions else 70.0
+                        
+                        f.write(f"  平均主机→VR传输延迟（阶段4）:\n")
+                        f.write(f"    基础传输延迟: {avg_base_transmission:.3f} ms（估算）\n")
+                        if avg_queue_blocking > 0:
+                            f.write(f"    队列阻塞延迟: {avg_queue_blocking:.3f} ms\n")
+                        f.write(f"    总传输延迟: {avg_host_to_vr:.3f} ms\n")
+                    
+                    if estimated_vr_renderings:
+                        avg_vr_rendering = np.mean([d for d in estimated_vr_renderings if d > 0])
+                        f.write(f"  平均VR渲染延迟（阶段5，估算）: {avg_vr_rendering:.3f} ms\n")
+                    f.write(f"  说明: 使用ngrok中转（东京），典型主机->VR传输延迟: 50-100ms，加上VR渲染: 10-20ms\n")
+                else:
+                    f.write(f"注意: 真正的显示延迟还包括VR端渲染时间（通常+10-20ms）\n")
+                f.write(f"说明: 闭环延迟 = VR设备捕获手部运动 -> 主机处理 -> 图像发送到VR（{'不包含' if self.network_mode else '包括'}网络传输）\n")
                 if invalid_count > 0:
                     f.write(f"\n⚠️  警告: {invalid_count} 帧的闭环延迟无效，因为HAND_MOVE时间戳过旧（>200ms）\n")
                     f.write(f"   这说明VR端HAND_MOVE事件发送频率可能过低，或VR端处理有问题\n")
@@ -816,6 +925,108 @@ if __name__ == '__main__':
                                 latency_monitor.current_frame['full_loop_delay_invalid'] = False
                                 latency_monitor.current_frame['websocket_send_complete_time'] = websocket_complete_time
                                 latency_monitor.current_frame['timestamps']['websocket_send_complete'] = websocket_complete_time
+                                
+                                # ⚠️ 关键问题：完整的闭环延迟应该包含所有阶段
+                                # 完整闭环 = VR设备捕获手部运动 → VR设备显示图像
+                                #          = VR→主机传输 + 主机处理 + VR处理 + 主机→VR传输 + VR渲染
+                                # 
+                                # 当前measured_delay = websocket_complete_time - hand_move_receive_time
+                                # 包含：VR→主机传输（在hand_move_receive_time中）+ 主机处理 + VR处理（到WebSocket发送）
+                                # 缺少：主机→VR的网络传输 + VR渲染
+                                if latency_monitor.network_mode:
+                                    # 估算主机->VR的网络传输延迟和VR渲染延迟
+                                    estimated_host_to_vr_transmission = 70.0  # 主机→VR网络传输：约70ms
+                                    estimated_vr_rendering = 20.0  # VR渲染延迟：约20ms
+                                    estimated_host_to_vr_delay = estimated_host_to_vr_transmission + estimated_vr_rendering  # 总计：90ms
+                                    
+                                    # 分解measured_delay来计算VR->主机的网络传输延迟
+                                    # measured_delay = websocket_complete_time - hand_move_receive_time
+                                    #                 = VR→主机传输 + 主机处理 + VR处理（到WebSocket发送）
+                                    # 
+                                    # 主机处理时间 = image_send_complete_time - hand_move_receive_time
+                                    # 这准确反映了从主机接收HAND_MOVE事件到图像写入共享内存完成的时间
+                                    # VR处理时间 = websocket_complete_time - image_send_complete_time
+                                    # 这反映了VR端从共享内存读取到WebSocket发送的时间（不包含网络传输）
+                                    host_processing_time = 0.0
+                                    vr_processing_time = 0.0
+                                    
+                                    if 'hand_move_receive_time' in latency_monitor.current_frame and 'image_send_complete_time' in latency_monitor.current_frame:
+                                        hand_move_time = latency_monitor.current_frame['hand_move_receive_time']
+                                        image_send_time = latency_monitor.current_frame['image_send_complete_time']
+                                        
+                                        # 主机处理时间：从接收HAND_MOVE到图像写入共享内存完成
+                                        if image_send_time >= hand_move_time:
+                                            host_processing_time = (image_send_time - hand_move_time) * 1000
+                                        else:
+                                            # 时间戳异常，使用默认值
+                                            host_processing_time = 0.0
+                                        
+                                        # VR端处理时间（从共享内存读取到WebSocket发送）
+                                        # 注意：websocket_complete_time必须大于image_send_time，否则说明时间戳有问题
+                                        if websocket_complete_time >= image_send_time:
+                                            vr_processing_time = (websocket_complete_time - image_send_time) * 1000
+                                        else:
+                                            # 时间戳异常（可能是读取了旧的websocket_complete_time），使用默认值
+                                            vr_processing_time = 0.0
+                                    
+                                    # 计算VR->主机的网络传输延迟
+                                    # measured_delay = VR→主机传输 + 主机处理 + VR处理
+                                    # 所以：VR→主机传输 = measured_delay - 主机处理 - VR处理
+                                    calculated_vr_to_host_delay = full_loop_delay - host_processing_time - vr_processing_time
+                                    
+                                    # 使用计算值和估算值的合理范围（避免负值或不合理的大值）
+                                    if calculated_vr_to_host_delay > 0 and calculated_vr_to_host_delay < 500:
+                                        estimated_vr_to_host_delay = calculated_vr_to_host_delay
+                                    else:
+                                        # 如果计算值不合理，假设网络对称
+                                        estimated_vr_to_host_delay = estimated_host_to_vr_transmission
+                                    
+                                    # 检查是否有队列阻塞延迟（WebSocket队列积压导致的额外延迟）
+                                    # 队列阻塞延迟应该添加到主机→VR传输延迟中，因为数据需要等待才能发送
+                                    # 注意：2D模式可能没有队列阻塞延迟的记录，所以默认为0
+                                    queue_blocking_delay = 0.0
+                                    if 'queue_blocking_delay_ms' in latency_monitor.current_frame:
+                                        queue_blocking_delay = latency_monitor.current_frame['queue_blocking_delay_ms']
+                                    elif 'transmit_delays' in latency_monitor.current_frame and 'queue_blocking_delay' in latency_monitor.current_frame['transmit_delays']:
+                                        queue_blocking_delay = latency_monitor.current_frame['transmit_delays']['queue_blocking_delay']
+                                    
+                                    # 实际的主机→VR传输延迟 = 基础传输延迟 + 队列阻塞延迟
+                                    actual_host_to_vr_transmission = estimated_host_to_vr_transmission + queue_blocking_delay
+                                    
+                                    # 完整的闭环延迟 = measured_delay + 主机→VR传输（含队列阻塞）+ VR渲染
+                                    complete_full_loop_delay = full_loop_delay + actual_host_to_vr_transmission + estimated_vr_rendering
+                                    
+                                    latency_monitor.current_frame['measured_delay_ms'] = full_loop_delay  # 重命名：这是不完整的measured延迟
+                                    latency_monitor.current_frame['estimated_vr_to_host_transmission_ms'] = estimated_vr_to_host_delay
+                                    latency_monitor.current_frame['estimated_host_to_vr_transmission_base_ms'] = estimated_host_to_vr_transmission  # 基础传输延迟
+                                    latency_monitor.current_frame['queue_blocking_delay_ms'] = queue_blocking_delay  # 队列阻塞延迟
+                                    latency_monitor.current_frame['estimated_host_to_vr_transmission_ms'] = actual_host_to_vr_transmission  # 实际传输延迟（含队列阻塞）
+                                    latency_monitor.current_frame['estimated_vr_rendering_ms'] = estimated_vr_rendering
+                                    latency_monitor.current_frame['host_processing_time_ms'] = host_processing_time
+                                    latency_monitor.current_frame['vr_processing_time_ms'] = vr_processing_time
+                                    latency_monitor.current_frame['calculated_vr_to_host_delay_ms'] = calculated_vr_to_host_delay
+                                    latency_monitor.current_frame['complete_full_loop_delay_ms'] = complete_full_loop_delay  # 完整的闭环延迟
+                                    latency_monitor.current_frame['real_full_loop_delay_ms'] = complete_full_loop_delay  # 保持向后兼容
+                                else:
+                                    # 本地模式下，同样输出分解：
+                                    # measured_delay = VR→主机传输 + 主机处理 + VR处理（到WebSocket发送）
+                                    # 主机→VR网络传输与VR渲染近似为0，仅用于分解展示
+                                    host_processing_time = latency_monitor.current_frame.get('total_delay_ms', 0)
+                                    vr_processing_time = 0.0
+                                    if 'image_send_complete_time' in latency_monitor.current_frame:
+                                        image_send_time = latency_monitor.current_frame['image_send_complete_time']
+                                        if websocket_complete_time >= image_send_time:
+                                            vr_processing_time = (websocket_complete_time - image_send_time) * 1000
+                                    calculated_vr_to_host_delay = full_loop_delay - host_processing_time - vr_processing_time
+                                    if calculated_vr_to_host_delay < 0:
+                                        calculated_vr_to_host_delay = 0.0
+                                    latency_monitor.current_frame['measured_delay_ms'] = full_loop_delay
+                                    latency_monitor.current_frame['estimated_vr_to_host_transmission_ms'] = calculated_vr_to_host_delay
+                                    latency_monitor.current_frame['host_processing_time_ms'] = host_processing_time
+                                    latency_monitor.current_frame['vr_processing_time_ms'] = vr_processing_time
+                                    latency_monitor.current_frame['estimated_host_to_vr_transmission_ms'] = 0.0
+                                    latency_monitor.current_frame['estimated_vr_rendering_ms'] = 0.0
+                                    latency_monitor.current_frame['complete_full_loop_delay_ms'] = full_loop_delay
                 except Exception:
                     pass
                 

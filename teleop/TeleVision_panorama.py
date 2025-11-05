@@ -994,7 +994,7 @@ class OpenTeleVision:
             
             if current_frame is not None:
                 current_frame['compute_delays']['vr_read_shared_memory'] = (t_read_end - t_read_start) * 1000
-                
+            
                 # 计算图像年龄（从主机端写入到VR端读取的时间差）
                 if image_age_ms is not None:
                     current_frame['image_age_ms'] = image_age_ms
@@ -1136,7 +1136,7 @@ class OpenTeleVision:
                     current_frame['transmit_delays']['vr_websocket_upsert'] = websocket_send_time
                     
                     # 将WebSocket发送完成时间写入共享内存（闭环延迟的终点）
-                    # 这是图像真正发送到VR的时间，包括网络传输
+                    # ⚠️ 注意：session.upsert是异步的，这只是VR端将数据放入发送队列的时间，不包含实际网络传输时间
                     if hasattr(self, 'meta_buf') and self.meta_buf is not None:
                         try:
                             mv = memoryview(self.meta_buf)
@@ -1292,135 +1292,135 @@ class OpenTeleVision:
                         frame_end = time.time()
                         total_delay = (frame_end - current_frame['start_time']) * 1000
                         fps = 1000.0 / total_delay if total_delay > 0 else 0
-                        
-                        try:
-                            with open(vr_latency_log, 'a', encoding='utf-8') as f:
-                                f.write(f"\n--- 帧 #{frame_count} (frame_id={curr_frame_id}) ---\n")
-                                f.write(f"总延迟: {total_delay:.3f} ms, 帧率: {fps:.2f} FPS\n")
+                    
+                    try:
+                        with open(vr_latency_log, 'a', encoding='utf-8') as f:
+                            f.write(f"\n--- 帧 #{frame_count} (frame_id={curr_frame_id}) ---\n")
+                            f.write(f"总延迟: {total_delay:.3f} ms, 帧率: {fps:.2f} FPS\n")
+                            
+                            # 计算并写入通信延迟
+                            if hasattr(self, '_comm_delays') and len(self._comm_delays) > 0:
+                                # 获取最近1秒内的通信延迟记录
+                                recent_comm_delays = [d for d in self._comm_delays if frame_end - d['timestamp'] < 1.0]
                                 
-                                # 计算并写入通信延迟
-                                if hasattr(self, '_comm_delays') and len(self._comm_delays) > 0:
-                                    # 获取最近1秒内的通信延迟记录
-                                    recent_comm_delays = [d for d in self._comm_delays if frame_end - d['timestamp'] < 1.0]
-                                    
-                                    # 按类型统计通信延迟
-                                    comm_delay_summary = {}
-                                    for delay_record in recent_comm_delays:
-                                        delay_type = delay_record['type']
-                                        if delay_type not in comm_delay_summary:
-                                            comm_delay_summary[delay_type] = []
-                                        comm_delay_summary[delay_type].append(delay_record['delay_ms'])
-                                    
-                                    if comm_delay_summary:
-                                        f.write("\n通信延迟 (最近1秒内的平均):\n")
-                                        for delay_type, delays in comm_delay_summary.items():
-                                            avg_delay = sum(delays) / len(delays)
-                                            f.write(f"  {delay_type}: {avg_delay:.3f} ms (样本数: {len(delays)})\n")
-                                    
-                                    # 清理旧的延迟记录（保留最近2秒）
-                                    self._comm_delays = [d for d in self._comm_delays if frame_end - d['timestamp'] < 2.0]
+                                # 按类型统计通信延迟
+                                comm_delay_summary = {}
+                                for delay_record in recent_comm_delays:
+                                    delay_type = delay_record['type']
+                                    if delay_type not in comm_delay_summary:
+                                        comm_delay_summary[delay_type] = []
+                                    comm_delay_summary[delay_type].append(delay_record['delay_ms'])
                                 
-                                # 计算端到端延迟（从事件接收到图像发送）
-                                if hasattr(self, '_last_event_receive_time'):
-                                    end_to_end_delays = []
-                                    for event_type, receive_time in self._last_event_receive_time.items():
-                                        if receive_time is not None:
-                                            e2e_delay = (frame_end - receive_time) * 1000
-                                            if 0 < e2e_delay < 1000:  # 合理的延迟范围
-                                                end_to_end_delays.append((event_type, e2e_delay))
-                                    
-                                    if end_to_end_delays:
-                                        f.write("\n端到端延迟 (从事件接收到图像发送):\n")
-                                        for event_type, e2e_delay in end_to_end_delays:
-                                            f.write(f"  {event_type}: {e2e_delay:.3f} ms\n")
+                                if comm_delay_summary:
+                                    f.write("\n通信延迟 (最近1秒内的平均):\n")
+                                    for delay_type, delays in comm_delay_summary.items():
+                                        avg_delay = sum(delays) / len(delays)
+                                        f.write(f"  {delay_type}: {avg_delay:.3f} ms (样本数: {len(delays)})\n")
                                 
-                                if t0 is not None:
-                                    f.write(f"端到端延迟 (t3-t0): {(frame_end - t0) * 1000:.3f} ms\n")
+                                # 清理旧的延迟记录（保留最近2秒）
+                                self._comm_delays = [d for d in self._comm_delays if frame_end - d['timestamp'] < 2.0]
+                            
+                            # 计算端到端延迟（从事件接收到图像发送）
+                            if hasattr(self, '_last_event_receive_time'):
+                                end_to_end_delays = []
+                                for event_type, receive_time in self._last_event_receive_time.items():
+                                    if receive_time is not None:
+                                        e2e_delay = (frame_end - receive_time) * 1000
+                                        if 0 < e2e_delay < 1000:  # 合理的延迟范围
+                                            end_to_end_delays.append((event_type, e2e_delay))
                                 
-                                # 计算延迟分类统计
-                                compute_total = sum(current_frame['compute_delays'].values())
-                                transmit_total = sum(current_frame['transmit_delays'].values())
+                                if end_to_end_delays:
+                                    f.write("\n端到端延迟 (从事件接收到图像发送):\n")
+                                    for event_type, e2e_delay in end_to_end_delays:
+                                        f.write(f"  {event_type}: {e2e_delay:.3f} ms\n")
+                            
+                            if t0 is not None:
+                                f.write(f"端到端延迟 (t3-t0): {(frame_end - t0) * 1000:.3f} ms\n")
+                            
+                            # 计算延迟分类统计
+                            compute_total = sum(current_frame['compute_delays'].values())
+                            transmit_total = sum(current_frame['transmit_delays'].values())
+                            
+                            f.write(f"\n计算延迟 (总计: {compute_total:.3f} ms):\n")
+                            for name, delay in sorted(current_frame['compute_delays'].items()):
+                                percentage = (delay / compute_total * 100) if compute_total > 0 else 0
+                                f.write(f"  {name}: {delay:.3f} ms ({percentage:.1f}%)\n")
+                            
+                            # 图像大小信息
+                            if 'image_size_jpeg_kb' in current_frame:
+                                f.write(f"\n图像大小信息:\n")
+                                f.write(f"  JPEG压缩后: {current_frame['image_size_jpeg_kb']:.2f} KB ({current_frame['image_size_jpeg_bytes']} 字节)\n")
+                                f.write(f"  Base64编码后: {current_frame['image_size_base64_kb']:.2f} KB ({current_frame['image_size_base64_bytes']} 字节)\n")
+                                f.write(f"  实际传输大小: {current_frame['transmit_size_kb']:.2f} KB\n")
+                            
+                            f.write(f"\n传输延迟 (总计: {transmit_total:.3f} ms):\n")
+                            for name, delay in sorted(current_frame['transmit_delays'].items()):
+                                percentage = (delay / transmit_total * 100) if transmit_total > 0 else 0
+                                f.write(f"  {name}: {delay:.3f} ms ({percentage:.1f}%)\n")
+                            
+                            # 带宽分析（只要有传输数据就写入，即使带宽估算失败）
+                            if 'transmit_size_bytes' in current_frame:
+                                f.write(f"\n带宽分析:\n")
+                                transmit_size_kb = current_frame['transmit_size_kb']
+                                websocket_time = current_frame['transmit_delays'].get('vr_websocket_upsert', 0)
+                                f.write(f"  传输数据: {transmit_size_kb:.2f} KB\n")
+                                f.write(f"  WebSocket发送时间: {websocket_time:.3f} ms\n")
                                 
-                                f.write(f"\n计算延迟 (总计: {compute_total:.3f} ms):\n")
-                                for name, delay in sorted(current_frame['compute_delays'].items()):
-                                    percentage = (delay / compute_total * 100) if compute_total > 0 else 0
-                                    f.write(f"  {name}: {delay:.3f} ms ({percentage:.1f}%)\n")
+                                # 如果有带宽估算，显示估算值
+                                if 'bandwidth_estimated_mbps' in current_frame:
+                                    f.write(f"  估算带宽: {current_frame['bandwidth_estimated_mbps']:.2f} Mbps\n")
+                                    if 'bandwidth_avg_estimated_mbps' in current_frame:
+                                        f.write(f"  平均估算带宽: {current_frame['bandwidth_avg_estimated_mbps']:.2f} Mbps\n")
+                                    if 'bandwidth_required_mbps' in current_frame:
+                                        f.write(f"  所需带宽: {current_frame['bandwidth_required_mbps']:.2f} Mbps\n")
                                 
-                                # 图像大小信息
-                                if 'image_size_jpeg_kb' in current_frame:
-                                    f.write(f"\n图像大小信息:\n")
-                                    f.write(f"  JPEG压缩后: {current_frame['image_size_jpeg_kb']:.2f} KB ({current_frame['image_size_jpeg_bytes']} 字节)\n")
-                                    f.write(f"  Base64编码后: {current_frame['image_size_base64_kb']:.2f} KB ({current_frame['image_size_base64_bytes']} 字节)\n")
-                                    f.write(f"  实际传输大小: {current_frame['transmit_size_kb']:.2f} KB\n")
+                                # 理论传输时间对比
+                                f.write(f"  理论传输时间 (不同带宽假设):\n")
+                                for test_bandwidth in [5, 10, 20, 50, 100]:
+                                    key = f'theoretical_time_{test_bandwidth}mbps_ms'
+                                    if key in current_frame:
+                                        f.write(f"    {test_bandwidth} Mbps: {current_frame[key]:.3f} ms\n")
                                 
-                                f.write(f"\n传输延迟 (总计: {transmit_total:.3f} ms):\n")
-                                for name, delay in sorted(current_frame['transmit_delays'].items()):
-                                    percentage = (delay / transmit_total * 100) if transmit_total > 0 else 0
-                                    f.write(f"  {name}: {delay:.3f} ms ({percentage:.1f}%)\n")
+                                # 带宽延迟（额外延迟）
+                                bandwidth_delay = current_frame['transmit_delays'].get('bandwidth_delay', 0)
+
+                                # 显示图像年龄和帧跳过信息
+                                if 'image_age_ms' in current_frame:
+                                    image_age = current_frame['image_age_ms']
+                                    f.write(f"\n图像年龄分析:\n")
+                                    f.write(f"  图像年龄: {image_age:.3f} ms (从主机端写入到VR端读取的时间)\n")
+                                    if current_frame.get('image_age_excessive', False):
+                                        f.write(f"  ⚠️  警告: 图像年龄过大，说明图像在共享内存中停留时间过长\n")
+                                    if 'frames_skipped' in current_frame and current_frame['frames_skipped'] > 0:
+                                        f.write(f"  跳过的帧数: {current_frame['frames_skipped']} 帧\n")
+                                        f.write(f"  说明: VR端跳过了 {current_frame['frames_skipped']} 帧，可能导致显示延迟\n")
+                                    
+                                if 'queue_backlog_frames' in current_frame and current_frame['queue_backlog_frames'] > 0:
+                                    f.write(f"\n队列阻塞分析:\n")
+                                    f.write(f"  积压帧数: {current_frame['queue_backlog_frames']:.2f} 帧\n")
+                                    f.write(f"  积压数据: {current_frame.get('queue_backlog_kb', 0):.2f} KB ({current_frame.get('queue_backlog_bytes', 0)} 字节)\n")
+                                    if 'queue_backlog_drain_time_ms' in current_frame:
+                                        f.write(f"  清空队列预计时间: {current_frame['queue_backlog_drain_time_ms']:.3f} ms\n")
+                                    if 'queue_blocking_delay_ms' in current_frame:
+                                        f.write(f"  队列阻塞延迟: {current_frame['queue_blocking_delay_ms']:.3f} ms\n")
+                                    
+                                    # 队列阻塞的组成部分
+                                    if 'bandwidth_delay_from_interval' in current_frame['transmit_delays']:
+                                        interval_delay = current_frame['transmit_delays']['bandwidth_delay_from_interval']
+                                        f.write(f"     - 帧间隔延迟: {interval_delay:.3f} ms\n")
+                                    if 'queue_blocking_delay' in current_frame['transmit_delays']:
+                                        queue_delay = current_frame['transmit_delays']['queue_blocking_delay']
+                                        f.write(f"     - 队列积压延迟: {queue_delay:.3f} ms\n")
                                 
-                                # 带宽分析（只要有传输数据就写入，即使带宽估算失败）
-                                if 'transmit_size_bytes' in current_frame:
-                                    f.write(f"\n带宽分析:\n")
-                                    transmit_size_kb = current_frame['transmit_size_kb']
-                                    websocket_time = current_frame['transmit_delays'].get('vr_websocket_upsert', 0)
-                                    f.write(f"  传输数据: {transmit_size_kb:.2f} KB\n")
-                                    f.write(f"  WebSocket发送时间: {websocket_time:.3f} ms\n")
-                                    
-                                    # 如果有带宽估算，显示估算值
-                                    if 'bandwidth_estimated_mbps' in current_frame:
-                                        f.write(f"  估算带宽: {current_frame['bandwidth_estimated_mbps']:.2f} Mbps\n")
-                                        if 'bandwidth_avg_estimated_mbps' in current_frame:
-                                            f.write(f"  平均估算带宽: {current_frame['bandwidth_avg_estimated_mbps']:.2f} Mbps\n")
-                                        if 'bandwidth_required_mbps' in current_frame:
-                                            f.write(f"  所需带宽: {current_frame['bandwidth_required_mbps']:.2f} Mbps\n")
-                                    
-                                    # 理论传输时间对比
-                                    f.write(f"  理论传输时间 (不同带宽假设):\n")
-                                    for test_bandwidth in [5, 10, 20, 50, 100]:
-                                        key = f'theoretical_time_{test_bandwidth}mbps_ms'
-                                        if key in current_frame:
-                                            f.write(f"    {test_bandwidth} Mbps: {current_frame[key]:.3f} ms\n")
-                                    
-                                    # 带宽延迟（额外延迟）
-                                    bandwidth_delay = current_frame['transmit_delays'].get('bandwidth_delay', 0)
-                                    
-                                    # 显示图像年龄和帧跳过信息
-                                    if 'image_age_ms' in current_frame:
-                                        image_age = current_frame['image_age_ms']
-                                        f.write(f"\n图像年龄分析:\n")
-                                        f.write(f"  图像年龄: {image_age:.3f} ms (从主机端写入到VR端读取的时间)\n")
-                                        if current_frame.get('image_age_excessive', False):
-                                            f.write(f"  ⚠️  警告: 图像年龄过大，说明图像在共享内存中停留时间过长\n")
-                                        if 'frames_skipped' in current_frame and current_frame['frames_skipped'] > 0:
-                                            f.write(f"  跳过的帧数: {current_frame['frames_skipped']} 帧\n")
-                                            f.write(f"  说明: VR端跳过了 {current_frame['frames_skipped']} 帧，可能导致显示延迟\n")
-                                    
-                                    if 'queue_backlog_frames' in current_frame and current_frame['queue_backlog_frames'] > 0:
-                                        f.write(f"\n队列阻塞分析:\n")
-                                        f.write(f"  积压帧数: {current_frame['queue_backlog_frames']:.2f} 帧\n")
-                                        f.write(f"  积压数据: {current_frame.get('queue_backlog_kb', 0):.2f} KB ({current_frame.get('queue_backlog_bytes', 0)} 字节)\n")
-                                        if 'queue_backlog_drain_time_ms' in current_frame:
-                                            f.write(f"  清空队列预计时间: {current_frame['queue_backlog_drain_time_ms']:.3f} ms\n")
-                                        if 'queue_blocking_delay_ms' in current_frame:
-                                            f.write(f"  队列阻塞延迟: {current_frame['queue_blocking_delay_ms']:.3f} ms\n")
-                                            
-                                            # 队列阻塞的组成部分
-                                            if 'bandwidth_delay_from_interval' in current_frame['transmit_delays']:
-                                                interval_delay = current_frame['transmit_delays']['bandwidth_delay_from_interval']
-                                                f.write(f"     - 帧间隔延迟: {interval_delay:.3f} ms\n")
-                                            if 'queue_blocking_delay' in current_frame['transmit_delays']:
-                                                queue_delay = current_frame['transmit_delays']['queue_blocking_delay']
-                                                f.write(f"     - 队列积压延迟: {queue_delay:.3f} ms\n")
-                                    
-                                    # 总是写入带宽延迟信息（即使为0也要记录）
-                                    if bandwidth_delay > 0:
-                                        f.write(f"\n  带宽限制造成的总延迟: {bandwidth_delay:.3f} ms\n")
-                                    else:
-                                        f.write(f"\n  带宽延迟: 很小（网络带宽充足）\n")
-                                
-                                f.write("\n")
-                        except Exception as e:
-                            print(f"Warning: 写入延迟日志失败: {e}")
+                                # 总是写入带宽延迟信息（即使为0也要记录）
+                                if bandwidth_delay > 0:
+                                    f.write(f"\n  带宽限制造成的总延迟: {bandwidth_delay:.3f} ms\n")
+                                else:
+                                    f.write(f"\n  带宽延迟: 很小（网络带宽充足）\n")
+                            
+                            f.write("\n")
+                    except Exception as e:
+                        print(f"Warning: 写入延迟日志失败: {e}")
                     
                     # 更新last_frame_id（只有在正常处理新帧时才更新，强制处理的旧帧不更新）
                     if curr_frame_id is not None:
