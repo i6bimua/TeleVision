@@ -207,7 +207,9 @@ class PanoramaConverter:
     
     def _prepare_cube_faces(self, cube_faces):
         """
-        准备cube faces：翻转必要的面
+        准备cube faces：直接返回，不进行翻转
+        根据py360convert的官方实现，不需要翻转cube faces，
+        坐标映射和padding逻辑会处理正确的映射关系
         
         Parameters
         ----------
@@ -217,13 +219,11 @@ class PanoramaConverter:
         Returns
         -------
         np.ndarray
-            翻转后的cube faces
+            原始cube faces（不翻转）
         """
-        cube_faces_prep = cube_faces.copy()
-        cube_faces_prep[1] = np.flip(cube_faces_prep[1], axis=1)  # Right
-        cube_faces_prep[2] = np.flip(cube_faces_prep[2], axis=1)  # Back
-        cube_faces_prep[4] = np.flip(cube_faces_prep[4], axis=0)  # Up
-        return cube_faces_prep
+        # py360convert不翻转cube faces，直接使用输入的faces
+        # 所有必要的方向调整都在坐标映射和padding中处理
+        return cube_faces
     
     def _pad_cube_faces(self, cube_faces_c, face_w):
         """
@@ -250,45 +250,46 @@ class PanoramaConverter:
             padded = np.zeros((6, face_w + 2, face_w + 2), dtype=cube_faces_c.dtype)
             padded[:, 1:-1, 1:-1] = cube_faces_c
         
-        # 填充上下padding（使用切片，参考官方实现）
+        # 填充上下padding（完全匹配py360convert官方实现）
         # Front face (0)
-        padded[0, 0, :] = padded[5, 1, :]  # top from Down
-        padded[0, -1, :] = padded[4, -2, :]  # bottom from Up
+        padded[0, 0, :] = padded[4, -2, :]  # top from Up bottom (索引-2)
+        padded[0, -1, :] = padded[5, 1, :]  # bottom from Down top (索引1)
         # Right face (1)
-        padded[1, 0, :] = padded[5, ::-1, -2]  # top from Down right edge reversed
-        padded[1, -1, :] = padded[4, :, -2]  # bottom from Up right edge
+        padded[1, 0, :] = padded[4, ::-1, -2]  # top from Up right edge (反转)
+        padded[1, -1, :] = padded[5, :, -2]  # bottom from Down right edge
         # Back face (2)
-        padded[2, 0, :] = padded[5, -2, ::-1]  # top from Down bottom reversed
-        padded[2, -1, :] = padded[4, 1, ::-1]  # bottom from Up top reversed
+        padded[2, 0, :] = padded[4, 1, ::-1]  # top from Up top (索引1, 反转)
+        padded[2, -1, :] = padded[5, -2, ::-1]  # bottom from Down bottom (索引-2, 反转)
         # Left face (3)
-        padded[3, 0, :] = padded[5, ::-1, 1]  # top from Down left edge reversed
-        padded[3, -1, :] = padded[4, :, 1]  # bottom from Up left edge
+        padded[3, 0, :] = padded[4, :, 1]  # top from Up left edge (索引1)
+        padded[3, -1, :] = padded[5, ::-1, 1]  # bottom from Down left edge (反转)
         # Up face (4)
-        padded[4, 0, :] = padded[0, 1, :]  # top from Front top
-        padded[4, -1, :] = padded[2, 1, ::-1]  # bottom from Back top reversed
+        padded[4, 0, :] = padded[2, 1, ::-1]  # top from Back top (索引1, 反转)
+        padded[4, -1, :] = padded[0, 1, :]  # bottom from Front top (索引1)
         # Down face (5)
-        padded[5, 0, :] = padded[2, -2, ::-1]  # top from Back bottom reversed
-        padded[5, -1, :] = padded[0, -2, :]  # bottom from Front bottom
+        padded[5, 0, :] = padded[0, -2, :]  # top from Front bottom (索引-2)
+        padded[5, -1, :] = padded[2, -2, ::-1]  # bottom from Back bottom (索引-2, 反转)
         
-        # 填充左右padding
+        # 填充左右padding（完全匹配py360convert官方实现）
         # Front face (0)
         padded[0, :, 0] = padded[3, :, -2]  # left from Left right edge
-        padded[0, :, -1] = padded[1, :, 1]  # right from Right left edge
+        padded[0, :, -1] = padded[1, :, 1]  # right from Right left edge (索引1)
         # Right face (1)
         padded[1, :, 0] = padded[0, :, -2]  # left from Front right edge
-        padded[1, :, -1] = padded[2, :, 1]  # right from Back left edge
+        padded[1, :, -1] = padded[2, :, 1]  # right from Back left edge (索引1)
         # Back face (2)
         padded[2, :, 0] = padded[1, :, -2]  # left from Right right edge
-        padded[2, :, -1] = padded[3, :, 1]  # right from Left left edge
+        padded[2, :, -1] = padded[3, :, 1]  # right from Left left edge (索引1)
         # Left face (3)
         padded[3, :, 0] = padded[2, :, -2]  # left from Back right edge
-        padded[3, :, -1] = padded[0, :, 1]  # right from Front left edge
-        # Up face (4) - 需要从原始数据取，因为此时Up/Down face的中间部分还未填充
-        padded[4, 1:-1, 0] = cube_faces_c[1, 0, ::-1]  # left from Right top reversed
-        padded[4, 1:-1, -1] = cube_faces_c[3, 0, :]  # right from Left top
+        padded[3, :, -1] = padded[0, :, 1]  # right from Front left edge (索引1)
+        # Up face (4) - 从已填充的数据取（匹配官方实现）
+        # 注意：LEFT和RIGHT是整列，所以使用 : 而不是 1:-1
+        padded[4, :, 0] = padded[3, 1, :]  # left from Left top (索引1)
+        padded[4, :, -1] = padded[1, 1, ::-1]  # right from Right top (索引1, 反转)
         # Down face (5)
-        padded[5, 1:-1, 0] = cube_faces_c[1, -1, :]  # left from Right bottom
-        padded[5, 1:-1, -1] = cube_faces_c[3, -1, ::-1]  # right from Left bottom reversed
+        padded[5, :, 0] = padded[3, -2, ::-1]  # left from Left bottom (索引-2, 反转)
+        padded[5, :, -1] = padded[1, -2, :]  # right from Right bottom (索引-2)
         
         return padded
     
